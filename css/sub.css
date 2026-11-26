@@ -1084,5 +1084,6 @@ html.lock,html.lock body{overflow:hidden!important}
 }
 .m-subhead{padding:0 6px;gap:0}
 .m-subhead .ms{width:40px;height:40px;flex:none;display:flex;align-items:center;justify-content:center;font-size:22px!important;font-variation-settings:'wght' 300}
-.m-subhead h1{position:static!important;width:auto!important;margin:0!important;flex:1 1 0;min-width:0;padding-left:80px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;font-size:16px!important}
+.m-subhead h1{position:static!important;width:auto!important;margin:0!important;flex:1 1 0;min-width:0;padding:0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;font-size:16px!important}
 .m-subhead .sp{display:none}
+.m-subhead .ms{overflow:hidden}

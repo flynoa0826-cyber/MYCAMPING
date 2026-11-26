@@ -303,3 +303,10 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind); else bind();
   new MutationObserver(function () { bind(); chk(); }).observe(document.body || document.documentElement, { childList: true });
 })();
+
+/* _05 bottom GNB wish badge */
+(function () {
+  var b = document.querySelector('.js-wishcnt'); if (!b) return;
+  var n = 0; try { var w = JSON.parse(localStorage.getItem('mc_wish') || 'null'); if (w) n = w.length; else if (window.PRODUCTS) n = window.PRODUCTS.filter(function (p) { return p.wish; }).length; else n = +b.dataset.def || 0; } catch (e) {}
+  if (n) { b.textContent = n > 99 ? '99+' : n; b.hidden = false; }
+})();

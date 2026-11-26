@@ -218,15 +218,35 @@
     var mb = document.querySelectorAll('.mo [data-act=menu]');
     if (!mb.length) return;
     var m = document.createElement('div'); m.className = 'mcat'; m.hidden = true; m.setAttribute('role', 'dialog'); m.setAttribute('aria-modal', 'true'); m.setAttribute('aria-label', '전체 카테고리');
-    m.innerHTML = '<header><button type="button" class="ms mcat-x" aria-label="닫기">chevron_left</button><h2>전체 카테고리</h2></header><div class="mcat-b"><nav class="l">' +
-      MC.map(function (c, i) { return '<button type="button" class="' + (i ? '' : 'on') + '" data-i="' + i + '">' + c[0] + '</button>'; }).join('') + '</nav><div class="r"></div></div>';
+    var BR = ['스노우피크', '헬리녹스', '콜맨', '그라운드커버', '코베아', '제이크라', '스노우라인', 'HXO', '하임플래닛', '도쿄크래프트', '위너웰', '폴러스터프', '디얼스', '텐트마크디자인'];
+    function logged() { try { return localStorage.getItem('mc_login') === '1'; } catch (e) { return false; } }
+    function cartN() { try { var c = JSON.parse(localStorage.getItem('mc_cart') || 'null'); return c ? c.length : 3; } catch (e) { return 3; } }
+    function memberHTML() {
+      if (!logged()) return '<div class="mcat-mem"><p>로그인하고 회원 혜택을 받아 보세요.</p><div class="bt"><a class="b1" href="login.html">로그인</a><a class="b2" href="join.html">회원가입</a></div></div>';
+      return '<div class="mcat-mem in"><div class="who"><b>박경환 님</b><span class="gr">베테랑</span><button type="button" class="lo js-logout">로그아웃</button></div>' +
+        '<div class="sc"><a href="cart.html"><span class="ms">shopping_bag</span>장바구니<em>' + cartN() + '</em></a><a href="recent.html"><span class="ms">history</span>최근 본 상품</a><a href="mypage.html"><span class="ms">person</span>마이페이지</a></div></div>';
+    }
+    m.innerHTML = '<header><button type="button" class="ms mcat-x" aria-label="닫기">chevron_left</button><h2>전체 메뉴</h2></header><div class="mcat-memw"></div>' +
+      '<div class="mcat-tabs" role="tablist"><button type="button" class="on" data-v="cat" role="tab" aria-selected="true">카테고리</button><button type="button" data-v="brand" role="tab" aria-selected="false">브랜드</button></div>' +
+      '<div class="mcat-brand" hidden>' + BR.map(function (b) { return '<a href="list.html?brand=' + encodeURIComponent(b) + '">' + b + '</a>'; }).join('') + '</div>' +
+      '<div class="mcat-b"><nav class="l">' +
+      MC.map(function (c, i) { return '<button type="button" class="' + (i ? '' : 'on') + '" data-i="' + i + '">' + c[0] + '</button>'; }).join('') + '</nav><div class="r"></div></div>' +
+      '<a class="mcat-bn" href="join.html"><div><span>신규 회원 혜택</span><b>첫 주문 무료 배송<br>+ 10,000원 쿠폰</b></div><img src="img/c010c054feb51f98be3073edc481332d970f0b07.png" alt=""></a>';
     document.body.appendChild(m);
+    function mem() { m.querySelector('.mcat-memw').innerHTML = memberHTML(); }
+    mem();
+    m.addEventListener('click', function (e) {
+      if (e.target.closest('.js-logout')) { try { localStorage.removeItem('mc_login'); } catch (x) {} mem(); if (window.MC_hdr) window.MC_hdr(); return; }
+      var t = e.target.closest('.mcat-tabs button'); if (!t) return;
+      [].forEach.call(m.querySelectorAll('.mcat-tabs button'), function (x) { x.classList.toggle('on', x === t); x.setAttribute('aria-selected', x === t); });
+      var br = t.dataset.v === 'brand'; m.querySelector('.mcat-brand').hidden = !br; m.querySelector('.mcat-b').hidden = br;
+    });
     var r = m.querySelector('.r');
     function show(i) { r.innerHTML = MC[i][1].map(function (s) { return '<a href="list.html">' + s + '<span class="ms">chevron_right</span></a>'; }).join(''); [].forEach.call(m.querySelectorAll('.l button'), function (b) { b.classList.toggle('on', +b.dataset.i === i); }); }
     show(0);
     m.querySelector('.l').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) show(+b.dataset.i); });
     function set2(o) { m.hidden = !o; document.documentElement.style.overflow = o ? 'hidden' : ''; }
-    [].forEach.call(mb, function (b) { b.addEventListener('click', function () { set2(true); }); });
+    [].forEach.call(mb, function (b) { b.addEventListener('click', function () { mem(); set2(true); }); });
     m.querySelector('.mcat-x').addEventListener('click', function () { set2(false); });
   })();
 
@@ -309,4 +329,18 @@
   var b = document.querySelector('.js-wishcnt'); if (!b) return;
   var n = 0; try { var w = JSON.parse(localStorage.getItem('mc_wish') || 'null'); if (w) n = w.length; else if (window.PRODUCTS) n = window.PRODUCTS.filter(function (p) { return p.wish; }).length; else n = +b.dataset.def || 0; } catch (e) {}
   if (n) { b.textContent = n > 99 ? '99+' : n; b.hidden = false; }
+})();
+
+/* _06 login state on PC header */
+(function () {
+  function on() { try { return localStorage.getItem('mc_login') === '1'; } catch (e) { return false; } }
+  window.MC_hdr = function () {
+    var a = document.querySelector('.pc a[href="login.html"]'), j = document.querySelector('.pc a[href="join.html"]');
+    if (!a || !j) return;
+    var pa = a.querySelector('p') || a, pj = j.querySelector('p') || j;
+    if (!a.dataset.t0) { a.dataset.t0 = pa.textContent; j.dataset.t0 = pj.textContent; }
+    if (on()) { pa.textContent = '박경환 님'; a.setAttribute('href', 'mypage.html'); pj.textContent = '로그아웃'; j.setAttribute('href', '#'); j.dataset.lo = '1'; }
+  };
+  document.addEventListener('click', function (e) { var j = e.target.closest('.pc a[data-lo="1"]'); if (j) { e.preventDefault(); try { localStorage.removeItem('mc_login'); } catch (x) {} location.reload(); } });
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', window.MC_hdr); else window.MC_hdr();
 })();

@@ -148,3 +148,9 @@
     draw();
   }
 })();
+
+/* _07 search home: clear recent */
+(function () {
+  var c = document.querySelector('.js-clear-recent'); if (!c) return;
+  c.addEventListener('click', function () { var s = document.querySelector('.js-recent'); s.querySelector('.sh-chips').hidden = true; s.querySelector('.sh-empty').hidden = false; });
+})();

@@ -1087,3 +1087,22 @@ html.lock,html.lock body{overflow:hidden!important}
 .m-subhead h1{position:static!important;width:auto!important;margin:0!important;flex:1 1 0;min-width:0;padding:0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;font-size:16px!important}
 .m-subhead .sp{display:none}
 .m-subhead .ms{overflow:hidden}
+/* _07 search home */
+.shome{padding-top:20px;padding-bottom:32px;max-width:720px}
+.sh-form{display:flex;gap:10px}
+.sh-form .inp{flex:1;height:48px;padding:0 16px;border:1px solid #dcdaec;border-radius:8px;font-size:14px;min-width:0}
+.sh-form .inp:focus{border-color:#4a3aa8;outline:0}
+.sh-go{width:48px;height:48px;border-radius:8px;background:#4a3aa8;color:#fff;font-size:22px;flex:none;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.sh-sec{margin-top:28px}
+.sh-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.sh-hd h2{font-size:15px;font-weight:700;color:#14123a}
+.sh-hd small{font-size:11px;font-weight:400;color:#8c89a5;margin-left:6px}
+.sh-hd .btn-pl{height:30px;font-size:12px;padding:0 10px}
+.sh-chips{display:flex;flex-wrap:wrap;gap:8px}
+.sh-chips a{height:36px;padding:0 14px;border:1px solid #dcdaec;border-radius:999px;display:flex;align-items:center;font-size:13px;color:#14123a}
+.sh-empty{font-size:13px;color:#8c89a5}
+.sh-rank li a{display:flex;align-items:center;gap:14px;height:40px;font-size:14px;color:#14123a}
+.sh-rank b{width:14px;font-weight:700;color:#4a4868}
+.sh-rank li:nth-child(-n+3) b{color:#4a3aa8}
+.sh-rank{list-style:none;padding:0;margin:0}
+.mdsl [data-n^="상품_카드"] p[style*="line-through"]{display:none!important}

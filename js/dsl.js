@@ -24,12 +24,18 @@
   };
   var MSG = { '저장': '저장되었습니다.', '삭제': '삭제되었습니다.', '선택 삭제': '선택한 상품을 삭제했습니다.', '전체 삭제': '모두 삭제했습니다.', '등록': '등록되었습니다.', '쿠폰 등록': '쿠폰이 등록되었습니다.', '취소': null, '수정': '수정 화면은 준비 중입니다.', '신청하기': '신청이 접수되었습니다.', '인증번호 받기': '인증번호를 보냈습니다.', '인증번호 전송': '인증번호를 보냈습니다.', '확인': '확인되었습니다.', '중복 확인': '사용할 수 있습니다.', '복사': '복사되었습니다.', '쿠폰 받기': '쿠폰을 받았습니다.', '다운로드': '쿠폰을 받았습니다.' };
   var BTN = /^(Button|버튼|link:|링크|Tab|Chip|항목|메뉴|LNB|Pagination|[0-9]+|‹|›|«|»)/;
-  function go(u) { if (u === null) { history.length > 1 ? history.back() : location.href = 'index.html'; } else location.href = u; }
+  function go(u) { if (u === 'login.html' && /login\.html$/.test(location.pathname)) { try { localStorage.setItem('mc_login', '1'); } catch (e) {} u = 'index.html'; } if (u === null) { history.length > 1 ? history.back() : location.href = 'index.html'; } else location.href = u; }
   function clickable(el, fn) { el.style.cursor = 'pointer'; el.setAttribute('role', el.getAttribute('role') || 'button'); el.tabIndex = 0; el.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); fn(e); }); el.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fn(e); } }); }
   function swap(a, b) { if (a === b) return; var A = [a].concat([].slice.call(a.querySelectorAll('*'))), B = [b].concat([].slice.call(b.querySelectorAll('*'))); if (A.length !== B.length) { var sa = a.getAttribute('style'); a.setAttribute('style', b.getAttribute('style')); b.setAttribute('style', sa); return; } for (var i = 0; i < A.length; i++) { var s = A[i].getAttribute('style'); var t = B[i].getAttribute('style'); if (s !== null && t !== null) { A[i].setAttribute('style', t); B[i].setAttribute('style', s); } } }
   function sig(el) { return [el].concat([].slice.call(el.querySelectorAll('*'))).map(function (x) { return (x.getAttribute('style') || '').replace(/width:[^;]*;|flex:[^;]*;/g, ''); }).join('|'); }
   function activeOf(group) { var c = {}; group.forEach(function (g) { var s = sig(g); c[s] = (c[s] || 0) + 1; }); var odd = group.filter(function (g) { return c[sig(g)] === 1; }); return odd.length === 1 ? odd[0] : null; }
   function groupSwap(group) { if (group.length < 2) return; var act = activeOf(group); if (!act) return; group.forEach(function (g) { clickable(g, function () { var a = activeOf(group) || act; if (a !== g) { swap(a, g); } }); }); }
+  document.addEventListener('click', function (e) {
+    var f = e.target.closest('.js-filter'), so = e.target.closest('.js-sort'), r = e.target.closest('#sh-sort [data-sort]');
+    if (f) { var s1 = document.getElementById('sh-filter'); if (s1) s1.classList.add('on'); }
+    if (so) { var s2 = document.getElementById('sh-sort'); if (s2) s2.classList.add('on'); }
+    if (r) { document.querySelectorAll('.js-sortlabel').forEach(function (l) { l.textContent = r.dataset.sort; }); document.querySelectorAll('#sh-sort [data-sort]').forEach(function (x) { x.classList.toggle('on', x === r); }); r.closest('.sheet').classList.remove('on'); }
+  });
   roots.forEach(function (root) {
     // linked screens
     root.querySelectorAll('[data-n^="link:"]').forEach(function (el) { var u = CODE[el.getAttribute('data-n').slice(5)]; if (u) clickable(el, function () { go(u); }); });
@@ -91,4 +97,14 @@
       }
     });
   });
+})();
+
+/* _07 search query reflect */
+(function () {
+  if (!/search\.html$/.test(location.pathname)) return;
+  var q = new URLSearchParams(location.search).get('q'); if (!q) return;
+  setTimeout(function () {
+    document.querySelectorAll('.dsl input').forEach(function (i) { if (i.value === '텐트') i.value = q; });
+    document.querySelectorAll('.dsl p').forEach(function (p) { if (p.textContent.trim() === '‘텐트’ 검색 결과') p.textContent = '‘' + q + '’ 검색 결과'; });
+  }, 0);
 })();

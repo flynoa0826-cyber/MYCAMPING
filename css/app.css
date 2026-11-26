@@ -201,3 +201,5 @@ body.home .pc .site-footer{padding-top:0!important}
 .mcat-bn b{font-size:15px;line-height:1.35;letter-spacing:-.01em}
 .mcat-bn img{height:84px;width:auto;object-fit:contain;margin-right:-6px}
 .mcat-tabs button{display:flex;align-items:center;justify-content:center;text-align:center;padding:0}
+.mcat-mem.in .sc .ic{position:relative;display:flex;width:22px;height:22px}
+.mcat-mem.in .sc .bdg{position:absolute;top:-6px;left:14px;min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:#a94c1b;color:#fff;font:700 10px/16px 'Noto Sans KR',sans-serif;font-style:normal;text-align:center}

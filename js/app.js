@@ -224,7 +224,7 @@
     function memberHTML() {
       if (!logged()) return '<div class="mcat-mem"><p>로그인하고 회원 혜택을 받아 보세요.</p><div class="bt"><a class="b1" href="login.html">로그인</a><a class="b2" href="join.html">회원가입</a></div></div>';
       return '<div class="mcat-mem in"><div class="who"><b>박경환 님</b><span class="gr">베테랑</span><button type="button" class="lo js-logout">로그아웃</button></div>' +
-        '<div class="sc"><a href="cart.html"><span class="ms">shopping_bag</span>장바구니<em>' + cartN() + '</em></a><a href="recent.html"><span class="ms">history</span>최근 본 상품</a><a href="mypage.html"><span class="ms">person</span>마이페이지</a></div></div>';
+        '<div class="sc"><a href="cart.html"><span class="ic"><span class="ms">shopping_bag</span>' + (cartN() ? '<i class="bdg">' + (cartN() > 99 ? '99+' : cartN()) + '</i>' : '') + '</span>장바구니</a><a href="recent.html"><span class="ic"><span class="ms">history</span></span>최근 본 상품</a><a href="mypage.html"><span class="ic"><span class="ms">person</span></span>마이페이지</a></div></div>';
     }
     m.innerHTML = '<header><button type="button" class="ms mcat-x" aria-label="닫기">chevron_left</button><h2>전체 메뉴</h2></header><div class="mcat-memw"></div>' +
       '<div class="mcat-tabs" role="tablist"><button type="button" class="on" data-v="cat" role="tab" aria-selected="true">카테고리</button><button type="button" data-v="brand" role="tab" aria-selected="false">브랜드</button></div>' +

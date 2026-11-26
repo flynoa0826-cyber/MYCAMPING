@@ -1344,15 +1344,16 @@
     <button type="button" class="row" data-sort="가벼운 순">가벼운 순</button>
   </div>
 </div>
-<div class="sheet" id="sh-filter" role="dialog" aria-modal="true" aria-label="제품 상세 검색">
+<div class="sheet fsheet" id="sh-filter" role="dialog" aria-modal="true" aria-label="필터">
   <div class="dim"></div>
-  <div class="box"><h2>제품 상세 검색</h2><button type="button" class="x ms" aria-label="닫기">close</button>
-    <p class="h3" style="font-size:15px;margin:8px 0 10px">가격</p><div class="chips" style="flex-wrap:wrap;margin:0;padding:0"><button type="button" class="chip2">30만 원 이하</button><button type="button" class="chip2">30~60만 원</button><button type="button" class="chip2">60~100만 원</button><button type="button" class="chip2">100만 원 이상</button></div>
-    <p class="h3" style="font-size:15px;margin:20px 0 10px">무게</p><div class="chips" style="flex-wrap:wrap;margin:0;padding:0"><button type="button" class="chip2">5 kg 이하</button><button type="button" class="chip2">5~10 kg</button><button type="button" class="chip2">10~15 kg</button><button type="button" class="chip2">15 kg 이상</button></div>
-    <p class="h3" style="font-size:15px;margin:20px 0 10px">수납 크기</p><div class="chips" style="flex-wrap:wrap;margin:0;padding:0"><button type="button" class="chip2">50 cm 이하</button><button type="button" class="chip2">50~70 cm</button><button type="button" class="chip2">70 cm 이상</button></div>
-    <p class="h3" style="font-size:15px;margin:20px 0 10px">수용 인원</p><div class="chips" style="flex-wrap:wrap;margin:0;padding:0"><button type="button" class="chip2">1~2인</button><button type="button" class="chip2">3~4인</button><button type="button" class="chip2">5인 이상</button></div>
-    <p class="h3" style="font-size:15px;margin:20px 0 10px">브랜드</p><div class="chips" style="flex-wrap:wrap;margin:0;padding:0"><button type="button" class="chip2">스노우피크</button><button type="button" class="chip2">콜맨</button><button type="button" class="chip2">그라운드커버</button><button type="button" class="chip2">헬리녹스</button><button type="button" class="chip2">제이크라</button><button type="button" class="chip2">스노우라인</button></div>
-    <div class="sheet-act" style="display:flex;gap:8px;margin-top:28px"><button type="button" class="btn btn-sub" style="flex:1" onclick="this.closest('.box').querySelectorAll('.chip2.on').forEach(function(c){c.classList.remove('on')})">초기화</button><button type="button" class="btn btn-pri x" style="flex:2;position:static;font-family:inherit;font-size:15px">상품 보기</button></div>
+  <div class="box"><i class="grab" aria-hidden="true"></i><h2>필터</h2><button type="button" class="x ms" aria-label="닫기">close</button>
+    <p class="h3 fsec">카테고리</p><div class="chips fchips"><button type="button" class="chip2 on">전체</button><button type="button" class="chip2">돔 텐트</button><button type="button" class="chip2">터널 텐트</button><button type="button" class="chip2">거실형 텐트</button><button type="button" class="chip2">티피 텐트</button><button type="button" class="chip2">백패킹 텐트</button><button type="button" class="chip2">원터치 텐트</button><button type="button" class="chip2">면 텐트</button></div>
+    <p class="h3 fsec">가격</p><div class="chips fchips"><button type="button" class="chip2">10만 원 이하</button><button type="button" class="chip2">10~30만 원</button><button type="button" class="chip2">30~50만 원</button><button type="button" class="chip2">50~100만 원</button><button type="button" class="chip2">100만 원 이상</button></div>
+    <p class="h3 fsec">무게</p><div class="chips fchips"><button type="button" class="chip2">5 kg 이하</button><button type="button" class="chip2">5~10 kg</button><button type="button" class="chip2">10~15 kg</button><button type="button" class="chip2">15 kg 이상</button></div>
+    <p class="h3 fsec">수납 크기</p><div class="chips fchips"><button type="button" class="chip2">50 cm 이하</button><button type="button" class="chip2">50~70 cm</button><button type="button" class="chip2">70 cm 이상</button></div>
+    <p class="h3 fsec">수용 인원</p><div class="chips fchips"><button type="button" class="chip2">1~2인</button><button type="button" class="chip2">3~4인</button><button type="button" class="chip2">5인 이상</button></div>
+    <p class="h3 fsec">브랜드</p><div class="chips fchips"><button type="button" class="chip2">스노우피크</button><button type="button" class="chip2">콜맨</button><button type="button" class="chip2">코베아</button><button type="button" class="chip2">헬리녹스</button><button type="button" class="chip2">제이크라</button><button type="button" class="chip2">스노우라인</button><button type="button" class="chip2">그라운드커버</button></div>
+    <div class="sheet-act" style="display:flex;gap:8px;margin-top:28px"><button type="button" class="btn btn-sub js-freset" style="flex:1">초기화</button><button type="button" class="btn btn-pri x js-fapply" style="flex:2;position:static;font-size:15px;width:auto;height:48px">상품 <span class="js-fcount">86</span>개 보기</button></div>
   </div>
 </div>
 

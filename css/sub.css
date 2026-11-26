@@ -1106,3 +1106,13 @@ html.lock,html.lock body{overflow:hidden!important}
 .sh-rank li:nth-child(-n+3) b{color:#4a3aa8}
 .sh-rank{list-style:none;padding:0;margin:0}
 .mdsl [data-n^="상품_카드"] p[style*="line-through"]{display:none!important}
+/* _10 filter sheet (Figma M-POP-FLT) */
+.fsheet .box .grab{display:block;width:40px;height:4px;border-radius:2px;background:#c9c3f0;margin:-14px auto 14px}
+.fsheet .fsec{font-size:14px;font-weight:700;color:#14123a;margin:22px 0 10px}
+.fsheet h2 + .x + .fsec{margin-top:4px}
+.fsheet .fchips{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0}
+.fsheet .fchips .chip2{height:36px;padding:0 14px;font-size:13px}
+@media (min-width:768px){.fsheet .box .grab{display:none}}
+.m-logout-w{padding:8px 20px 32px;background:#fff}
+.m-logout{width:100%;height:44px;border:1px solid #dcdaec;border-radius:4px;background:#fff;font-size:14px;color:#4a4868}
+.m-logout{display:flex;align-items:center;justify-content:center;margin-top:4px}

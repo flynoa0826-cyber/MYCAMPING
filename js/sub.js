@@ -154,3 +154,17 @@
   var c = document.querySelector('.js-clear-recent'); if (!c) return;
   c.addEventListener('click', function () { var s = document.querySelector('.js-recent'); s.querySelector('.sh-chips').hidden = true; s.querySelector('.sh-empty').hidden = false; });
 })();
+
+/* _10 filter sheet logic: category single-select, count, reset */
+(function () {
+  var sh = document.getElementById('sh-filter'); if (!sh || !sh.classList.contains('fsheet')) return;
+  var cat = sh.querySelector('.fchips'), cnt = sh.querySelector('.js-fcount');
+  function upd() { var k = sh.querySelectorAll('.fchips:not(:first-of-type) .chip2.on').length + (cat.querySelector('.chip2.on:not(:first-child)') ? 1 : 0); cnt.textContent = k ? Math.max(3, Math.round(248 * Math.pow(0.58, k))) : 248; }
+  sh.addEventListener('click', function (e) {
+    var c = e.target.closest('.chip2');
+    if (c && cat.contains(c)) { setTimeout(function () { [].forEach.call(cat.children, function (x) { x.classList.toggle('on', x === c); }); upd(); }, 0); return; }
+    if (c) { setTimeout(upd, 0); return; }
+    if (e.target.closest('.js-freset')) { sh.querySelectorAll('.chip2.on').forEach(function (x) { x.classList.remove('on'); }); cat.firstElementChild.classList.add('on'); upd(); }
+  });
+  upd();
+})();

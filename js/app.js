@@ -288,7 +288,7 @@
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeM(); });
 })();
 
-/* _03 horizontal list indicators (mobile) */
+/* _10 horizontal list indicators (mobile) — dots + active bar (Figma 844:35553) */
 (function () {
   function setup() {
     if (window.innerWidth > 767) return;
@@ -297,18 +297,16 @@
       if (el._hind || el.closest('.mcat,.catdd')) return;
       var cs = getComputedStyle(el); if (cs.overflowX !== 'auto' && cs.overflowX !== 'scroll') return;
       function its() { return [].slice.call(el.children).filter(function (c) { return c.offsetWidth > 40; }); }
-      var items = its();
-      if (items.length < 2) return;
-      var ind = document.createElement('div'); ind.className = 'hind';
-      ind.innerHTML = '<button type="button" aria-label="이전">chevron_left</button><span><b>1</b> / ' + items.length + '</span><button type="button" aria-label="다음">chevron_right</button>';
+      var items = its(); if (items.length < 2) return;
+      var ind = document.createElement('div'); ind.className = 'hind'; ind.setAttribute('role', 'tablist');
       el.parentNode.insertBefore(ind, el.nextSibling); el._hind = ind;
-      var prev = ind.children[0], next = ind.children[2], cur = ind.querySelector('b');
-      function idx() { var x = el.scrollLeft, best = 0, d = 1e9; items.forEach(function (it, i) { var dd = Math.abs(it.offsetLeft - el.offsetLeft - parseFloat(getComputedStyle(el).paddingLeft || 0) - x); if (dd < d) { d = dd; best = i; } }); if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 4) best = items.length - 1; return best; }
-      function upd() { items = its(); ind.querySelector('span').lastChild.textContent = ' / ' + items.length; var i = idx(); cur.textContent = i + 1; prev.disabled = i === 0; next.disabled = i === items.length - 1; ind.hidden = el.scrollWidth <= el.clientWidth + 4; }
-      function go(d) { items = its(); var i = Math.max(0, Math.min(items.length - 1, idx() + d)); el.scrollTo({ left: items[i].offsetLeft - items[0].offsetLeft, behavior: 'smooth' }); }
-      prev.addEventListener('click', function () { go(-1); }); next.addEventListener('click', function () { go(1); });
-      el.addEventListener('scroll', function () { clearTimeout(el._ht); el._ht = setTimeout(upd, 60); }, { passive: true });
-      upd();
+      function build() { items = its(); ind.innerHTML = items.map(function (_, i) { return '<button type="button" role="tab" aria-label="' + (i + 1) + '번째 보기"></button>'; }).join(''); }
+      function idx() { var x = el.scrollLeft, best = 0, d = 1e9, o = items[0].offsetLeft; items.forEach(function (it, i) { var dd = Math.abs(it.offsetLeft - o - x); if (dd < d) { d = dd; best = i; } }); if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 4) best = items.length - 1; return best; }
+      function upd() { if (its().length !== ind.children.length) build(); var i = idx(); [].forEach.call(ind.children, function (b, k) { b.classList.toggle('on', k === i); b.setAttribute('aria-selected', k === i); }); ind.hidden = el.scrollWidth <= el.clientWidth + 4; }
+      ind.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; var i = [].indexOf.call(ind.children, b); items = its(); el.scrollTo({ left: items[i].offsetLeft - items[0].offsetLeft, behavior: 'smooth' }); });
+      el.addEventListener('scroll', function () { clearTimeout(el._ht); el._ht = setTimeout(upd, 50); }, { passive: true });
+      build(); upd();
+      new MutationObserver(function () { setTimeout(upd, 60); }).observe(el, { childList: true });
     });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { setTimeout(setup, 50); }); else setTimeout(setup, 50);

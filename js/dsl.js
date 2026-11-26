@@ -108,3 +108,13 @@
     document.querySelectorAll('.dsl p').forEach(function (p) { if (p.textContent.trim() === '‘텐트’ 검색 결과') p.textContent = '‘' + q + '’ 검색 결과'; });
   }, 0);
 })();
+
+/* _10 mobile mypage logout */
+(function () {
+  if (!/mypage\.html$/.test(location.pathname)) return;
+  var z = document.querySelector('.mdsl .mz'); if (!z) return;
+  var w = document.createElement('div'); w.className = 'm-logout-w';
+  w.innerHTML = '<button type="button" class="m-logout">로그아웃</button>';
+  z.appendChild(w);
+  w.firstChild.addEventListener('click', function () { try { localStorage.removeItem('mc_login'); } catch (e) {} location.href = 'index.html'; });
+})();

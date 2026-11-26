@@ -22,30 +22,52 @@
     main.src = M.src(gal[0]); main.alt = p.name;
     $('.js-thumbs', dp).innerHTML = gal.map(function (h, i) { return '<button type="button" class="' + (i ? '' : 'on') + '" data-src="' + M.src(h) + '" aria-label="이미지 ' + (i + 1) + '"><img src="' + M.src(h) + '" alt=""></button>'; }).join('');
     $$('.js-thumbs button', dp).forEach(function (b) { b.addEventListener('click', function () { $$('.js-thumbs button', dp).forEach(function (x) { x.classList.toggle('on', x === b); }); main.src = b.dataset.src; }); });
-    var color = '아이보리', set = '본체 단품', qty = 1;
+    var color = '아이보리', set = '본체 단품';
+    var lines = [{ color: color, set: set, add: add, qty: 1 }];
+    var box = $('.js-lines', dp);
     function upd() {
-      var unit = base + add;
-      $('.js-picked', dp).textContent = color + ' / ' + set;
-      $('.js-qty', dp).value = qty; $('.js-cnt', dp).textContent = qty;
-      $('.js-line', dp).textContent = won(unit * qty); $('.js-total', dp).textContent = won(unit * qty);
+      var tq = 0, tp = 0;
+      box.innerHTML = lines.map(function (l, i) {
+        var unit = base + l.add; tq += l.qty; tp += unit * l.qty;
+        return '<div class="picked" data-i="' + i + '"><div class="t"><span>' + M.esc(l.color + ' / ' + l.set) + '</span><button type="button" class="ms js-lx" aria-label="옵션 삭제" style="font-size:18px">close</button></div>' +
+          '<div class="b"><div class="qty"><button type="button" class="ms js-lq" data-q="-1" aria-label="수량 빼기">remove</button><input class="js-lqty" value="' + l.qty + '" inputmode="numeric" aria-label="수량"><button type="button" class="ms js-lq" data-q="1" aria-label="수량 더하기">add</button></div><span>' + won(unit * l.qty) + '</span></div></div>';
+      }).join('');
+      box.hidden = !lines.length;
+      $$('.js-cnt').forEach(function (e) { e.textContent = tq; });
+      $$('.js-total').forEach(function (e) { e.textContent = won(tp); });
+    }
+    function pick() {
+      var f = lines.filter(function (l) { return l.color === color && l.set === set; })[0];
+      if (f) { f.qty = Math.min(99, f.qty + 1); M.toast('이미 선택한 옵션입니다. 수량을 1개 늘렸습니다.'); }
+      else lines.push({ color: color, set: set, add: add, qty: 1 });
+      upd();
     }
     function radio(sel, cb) {
       $$(sel, dp).forEach(function (b) {
-        b.addEventListener('click', function () { $$(sel, dp).forEach(function (x) { x.classList.toggle('on', x === b); x.setAttribute('aria-checked', x === b); }); cb(b); upd(); });
+        b.addEventListener('click', function () { $$(sel, dp).forEach(function (x) { x.classList.toggle('on', x === b); x.setAttribute('aria-checked', x === b); }); cb(b); pick(); });
       });
     }
     radio('.colors button', function (b) { color = b.dataset.color; });
     radio('.sets button', function (b) { set = b.dataset.set; add = +b.dataset.add; });
-    $$('[data-q]', dp).forEach(function (b) { b.addEventListener('click', function () { qty = Math.max(1, Math.min(99, qty + +b.dataset.q)); upd(); }); });
-    $('.js-pickx', dp).addEventListener('click', function () { qty = 1; $$('.colors button', dp)[0].click(); $$('.sets button', dp)[0].click(); });
-    $('.js-qty', dp).addEventListener('change', function () { qty = Math.max(1, Math.min(99, parseInt(this.value, 10) || 1)); upd(); });
+    box.addEventListener('click', function (e) {
+      var row = e.target.closest('.picked'); if (!row) return; var i = +row.dataset.i;
+      if (e.target.closest('.js-lx')) { lines.splice(i, 1); upd(); return; }
+      var q = e.target.closest('.js-lq'); if (q) { lines[i].qty = Math.max(1, Math.min(99, lines[i].qty + +q.dataset.q)); upd(); }
+    });
+    box.addEventListener('change', function (e) {
+      var row = e.target.closest('.picked'); if (!row || !e.target.classList.contains('js-lqty')) return;
+      lines[+row.dataset.i].qty = Math.max(1, Math.min(99, parseInt(e.target.value, 10) || 1)); upd();
+    });
+    function items() { return lines.map(function (l) { return { id: p.id, qty: l.qty, on: true, opt: l.color + ' / ' + l.set, add: l.add }; }); }
+    function need() { if (!lines.length) { M.toast('옵션을 선택해 주세요.'); return false; } return true; }
     function addCart() {
-      var c = cart(), f = c.filter(function (x) { return x.id === p.id; })[0];
-      if (f) f.qty += qty; else c.unshift({ id: p.id, qty: qty, on: true, opt: color + ' / ' + set, add: add });
+      var c = cart();
+      items().forEach(function (it) { var f = c.filter(function (x) { return x.id === it.id && x.opt === it.opt; })[0]; if (f) f.qty += it.qty; else c.unshift(it); });
       M.store('mc_cart', c);
     }
-    $$('.js-addcart').forEach(function (b) { b.addEventListener('click', function () { addCart(); M.toast('장바구니에 담았습니다.'); }); });
-    $$('.js-buy').forEach(function (b) { b.addEventListener('click', function () { M.store('mc_buynow', [{ id: p.id, qty: qty, on: true, opt: color + ' / ' + set, add: add }]); location.href = 'order.html?now=1'; }); });
+    $$('.js-addcart').forEach(function (b) { b.addEventListener('click', function () { if (!need()) return; addCart(); M.toast('장바구니에 담았습니다.'); }); });
+    $$('.js-buy').forEach(function (b) { b.addEventListener('click', function () { if (!need()) return; M.store('mc_buynow', items()); location.href = 'order.html?now=1'; }); });
+    upd();
     var wl = M.store('mc_wish') || P.filter(function (x) { return x.wish; }).map(function (x) { return x.id; }), won2 = wl.indexOf(p.id) > -1;
     function wishUI() { $$('.js-wish').forEach(function (b) { b.classList.toggle('on', won2); b.setAttribute('aria-pressed', won2); }); }
     $$('.js-wish,.js-wish2').forEach(function (b) {

@@ -267,3 +267,39 @@
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeM(); });
 })();
+
+/* _03 horizontal list indicators (mobile) */
+(function () {
+  function setup() {
+    if (window.innerWidth > 767) return;
+    var cands = [].slice.call(document.querySelectorAll('.mo .snap-x, .related .pgrid, .snap-list, [data-hscroll]'));
+    cands.forEach(function (el) {
+      if (el._hind || el.closest('.mcat,.catdd')) return;
+      var cs = getComputedStyle(el); if (cs.overflowX !== 'auto' && cs.overflowX !== 'scroll') return;
+      function its() { return [].slice.call(el.children).filter(function (c) { return c.offsetWidth > 40; }); }
+      var items = its();
+      if (items.length < 2) return;
+      var ind = document.createElement('div'); ind.className = 'hind';
+      ind.innerHTML = '<button type="button" aria-label="이전">chevron_left</button><span><b>1</b> / ' + items.length + '</span><button type="button" aria-label="다음">chevron_right</button>';
+      el.parentNode.insertBefore(ind, el.nextSibling); el._hind = ind;
+      var prev = ind.children[0], next = ind.children[2], cur = ind.querySelector('b');
+      function idx() { var x = el.scrollLeft, best = 0, d = 1e9; items.forEach(function (it, i) { var dd = Math.abs(it.offsetLeft - el.offsetLeft - parseFloat(getComputedStyle(el).paddingLeft || 0) - x); if (dd < d) { d = dd; best = i; } }); if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 4) best = items.length - 1; return best; }
+      function upd() { items = its(); ind.querySelector('span').lastChild.textContent = ' / ' + items.length; var i = idx(); cur.textContent = i + 1; prev.disabled = i === 0; next.disabled = i === items.length - 1; ind.hidden = el.scrollWidth <= el.clientWidth + 4; }
+      function go(d) { items = its(); var i = Math.max(0, Math.min(items.length - 1, idx() + d)); el.scrollTo({ left: items[i].offsetLeft - items[0].offsetLeft, behavior: 'smooth' }); }
+      prev.addEventListener('click', function () { go(-1); }); next.addEventListener('click', function () { go(1); });
+      el.addEventListener('scroll', function () { clearTimeout(el._ht); el._ht = setTimeout(upd, 60); }, { passive: true });
+      upd();
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { setTimeout(setup, 50); }); else setTimeout(setup, 50);
+  window.addEventListener('resize', function () { clearTimeout(window._hr); window._hr = setTimeout(setup, 200); });
+})();
+
+/* _03 scroll lock while a sheet / full menu is open */
+(function () {
+  function chk() { var open = document.querySelector('.sheet.on, .mcat:not([hidden])'); document.documentElement.classList.toggle('lock', !!open); }
+  var mo = new MutationObserver(chk);
+  function bind() { document.querySelectorAll('.sheet, .mcat').forEach(function (s) { if (!s._lk) { s._lk = 1; mo.observe(s, { attributes: true, attributeFilter: ['class', 'aria-hidden', 'hidden', 'style'] }); } }); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind); else bind();
+  new MutationObserver(function () { bind(); chk(); }).observe(document.body || document.documentElement, { childList: true });
+})();

@@ -119,3 +119,42 @@ a,button,[data-act]{transition:opacity .15s,background-color .15s,color .15s,bor
 .mcat .r{overflow-y:auto;padding:4px 20px 20px}
 .mcat .r a{display:flex;align-items:center;justify-content:space-between;height:49px;border-bottom:1px solid #dcdaec;font-size:15px;color:#14123a;letter-spacing:-.0025em}
 .mcat .r a .ms{font-size:20px;color:#4a4868}
+
+/* _03 mobile type scale (generated) */
+@media (max-width:767px){
+.modal h3{font-size:17px}
+.modal .opt{font-size:14px}
+.modal .row button{font-size:14px}
+.m-drawer-top{font-size:14px}
+.m-drawer-x{font-size:20px}
+.m-drawer-h{font-size:13px}
+.m-drawer-a{font-size:14px}
+.m-drawer-a .ms{font-size:17px}
+.catdd a{font-size:13px}
+.catdd a.h{font-size:14px}
+.mcat header h2{font-size:16px}
+.mcat-x{font-size:20px}
+.mcat .l button{font-size:14px}
+.mcat .r a{font-size:14px}
+.mcat .r a .ms{font-size:17px}
+}
+/* _03 */
+body.home .pc .site-footer{padding-top:0!important}
+.coupon-art{z-index:3}
+.mo{overflow-x:clip}
+.mo .season-cards>.pcard{width:calc(100% - 28px)!important;flex:0 0 calc(100% - 28px)!important;max-width:none!important}
+.mo .season-cards .thumb{height:auto!important;aspect-ratio:1/1}
+.mo [data-n$="_태그"],.mo [data-n^="태그"]{height:20px!important;min-height:0!important}
+.mo .pcard p[style*="line-through"]{display:none!important}
+.hind{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:16px;font:500 13px/1 'Noto Sans KR',sans-serif;color:#14123a;letter-spacing:-.01em}
+.hind[hidden]{display:none}
+.hind button{width:28px;height:28px;border:0;background:none;display:flex;align-items:center;justify-content:center;color:#14123a;cursor:pointer;font-family:'Material Symbols Rounded';font-size:20px}
+.hind button:disabled{color:#c9c7da;cursor:default}
+.hind span b{font-weight:700}
+@media (min-width:768px){.hind{display:none}}
+.hind{align-self:stretch;width:100%}
+.mo .m-top{position:sticky!important;top:0;z-index:60}
+.mo .brand-tabs{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.mo .brand-tabs::-webkit-scrollbar{display:none}
+.mo .brand-tabs::after{content:'';flex:0 0 6px}
+.mo .m-header .ms{font-variation-settings:'wght' 300}

@@ -102,16 +102,16 @@
   /* list page */
   var lp = $('[data-page=list]');
   if (lp) {
-    var grid = $('.pgrid', lp), state = { sub: '전체', sort: '추천순', myfit: true };
+    var qs = new URLSearchParams(location.search), grid = $('.pgrid', lp), state = { sub: '전체', sort: qs.get('sort') === 'new' ? '신상품순' : '추천순', myfit: !qs.get('brand'), brand: qs.get('brand') };
     function draw() {
-      var l = P.filter(function (p) { return p.id <= 16 && (state.sub === '전체' || p.sub === state.sub) && (!state.myfit || p.trunk); });
+      var l = P.filter(function (p) { return (state.brand ? p.brand === state.brand : p.id <= 16) && (state.sub === '전체' || p.sub === state.sub) && (!state.myfit || p.trunk); });
       var s = state.sort;
       if (s === '낮은 가격순') l.sort(function (a, b) { return a.price - b.price; });
       else if (s === '높은 가격순') l.sort(function (a, b) { return b.price - a.price; });
       else if (s === '가벼운 순') l.sort(function (a, b) { return a.kg - b.kg; });
       else if (s === '신상품순') l.sort(function (a, b) { return b.id - a.id; });
       grid.innerHTML = l.length ? l.map(function (p) { return card(p); }).join('') : '<p style="grid-column:1/-1;padding:80px 0;text-align:center;color:#6b6988">조건에 맞는 상품이 없습니다. 다른 카테고리를 선택해 주세요.</p>';
-      $$('.js-count', lp).forEach(function (c) { c.textContent = (state.sub === '전체' ? 248 : l.length) + '개'; });
+      $$('.js-count', lp).forEach(function (c) { c.textContent = (state.sub === '전체' && !state.brand ? 248 : l.length) + '개'; });
       $$('.js-sortlabel', lp).forEach(function (c) { c.textContent = s; });
     }
     $$('.cats .chip2', lp).forEach(function (c) {

@@ -752,3 +752,337 @@ body.bg-tint{background:var(--bg2)}
 .mdsl{overflow:hidden}
 .mdsl .mz{width:375px;transform-origin:0 0}
 .dsl [data-n]{box-sizing:border-box}
+
+/* _03 mobile type scale (generated) */
+@media (max-width:767px){
+.m-subhead h1{font-size:16px}
+.m-subhead a,.m-subhead button{font-size:20px}
+.crumb{font-size:12px}
+.ptitle h1{font-size:26px}
+.ptitle .cnt{font-size:14px}
+.pdesc{font-size:14px}
+.h2{font-size:18px}
+.h3{font-size:16px}
+.ptitle h1{font-size:18px}
+.ptitle .cnt{font-size:14px}
+.pdesc{font-size:13px}
+.h2{font-size:16px}
+.btn{font-size:14px}
+.btn-sm{font-size:13px}
+.btn-xs{font-size:12px}
+.btn{font-size:14px}
+.btn-sm{font-size:13px}
+.chip2{font-size:14px}
+.chip2{font-size:13px}
+.ck{font-size:14px}
+.ck i::after{font-size:14px}
+.fsel{font-size:13px}
+.fsel .ms{font-size:16px}
+.sorts{font-size:13px}
+.m-tools .ck{font-size:14px}
+.m-tools .bar{font-size:13px}
+.m-tools .bar button{font-size:13px}
+.fit{font-size:14px}
+.stars{font-size:13px}
+.stars .st{font-size:14px}
+.stars .st{font-size:12px}
+.pager a,.pager button{font-size:14px}
+.pager .ms{font-size:17px}
+.sheet .box h2{font-size:17px}
+.sheet .x{font-size:20px}
+.sheet .row{font-size:14px}
+.toast{font-size:14px}
+.fl>label,.fl>.lb{font-size:14px}
+.inp{font-size:14px}
+.help{font-size:12px}
+.errmsg{font-size:12px}
+.inp{font-size:14px}
+.fl>label,.fl>.lb{font-size:14px}
+.steps{font-size:14px}
+.steps i{font-size:12px}
+.steps .done i{font-size:14px}
+.pagehead h1{font-size:26px}
+.pagehead h1 small{font-size:18px}
+.steps{font-size:12px}
+.sum h2{font-size:17px}
+.sum dl{font-size:14px}
+.sum .tot b{font-size:14px}
+.sum .tot strong{font-size:24px}
+.sum .pt{font-size:12px}
+.agree .ck{font-size:13px}
+.agree .ck.all{font-size:14px}
+.agree .ck a{font-size:12px}
+.qty button{font-size:16px}
+.qty input{font-size:14px}
+.dinfo .br{font-size:13px}
+.dinfo h1{font-size:25px}
+.dinfo .desc{font-size:14px}
+.dinfo .rt{font-size:13px}
+.dinfo .price .d{font-size:22px}
+.dinfo .price .p{font-size:22px}
+.dinfo .price s{font-size:14px}
+.cpn{font-size:13px}
+.cpn button{font-size:13px}
+.dinfo .pts{font-size:12px}
+.myfit .hd{font-size:14px}
+.myfit li .ms{font-size:17px}
+.myfit li b{font-size:14px}
+.myfit li span{font-size:12px}
+.ship div{font-size:13px}
+.opt .lb{font-size:14px}
+.colors button{font-size:13px}
+.sets button b{font-size:14px}
+.sets button em{font-size:12px}
+.picked .t{font-size:13px}
+.picked .b{font-size:14px}
+.dtot{font-size:14px}
+.dtot strong{font-size:24px}
+.dbtns .wishb{font-size:20px}
+.npay .l b{font-size:14px}
+.npay .n{font-size:15px}
+.npay .z{font-size:13px}
+.dtabs a{font-size:14px}
+.dsec h2{font-size:20px}
+.dcopy h3{font-size:20px}
+.dcopy p{font-size:14px}
+.feat div{font-size:13px}
+.size2 span{font-size:12px}
+.size2 b{font-size:17px}
+.spec-t div{font-size:13px}
+.rvsum .big span{font-size:12px}
+.rv .m .st2{font-size:12px}
+.rv .m b{font-size:12px}
+.rv p{font-size:14px}
+.qna div{font-size:13px}
+.info-t div{font-size:13px}
+.dinfo h1{font-size:18px}
+.dinfo .price .d,.dinfo .price .p{font-size:18px}
+.dtabs a{font-size:13px}
+.dsec h2{font-size:17px}
+.m-buybar .wishb{font-size:18px}
+.notice{font-size:14px}
+.btn-pl{font-size:13px}
+.grp>header{font-size:14px}
+.grp>header span{font-size:12px}
+.crow .br{font-size:12px}
+.crow .nm{font-size:15px}
+.crow .op{font-size:14px}
+.crow .pr s{font-size:13px}
+.crow .pr b{font-size:17px}
+.crow .pr span{font-size:12px}
+.crow .del{font-size:18px}
+.load h3{font-size:14px}
+.load p{font-size:13px}
+.load p.s{font-size:12px}
+.cpnbox{font-size:14px}
+.cart-empty p{font-size:16px}
+.cart-empty span{font-size:13px}
+.notice{font-size:12px}
+.selbar .ck{font-size:14px}
+.crow .nm{font-size:14px}
+.m-orderbar .t b{font-size:16px}
+.osec>header .n{font-size:14px}
+.osec>header h2{font-size:18px}
+.osec>header .ms{font-size:20px}
+.addr{font-size:13px}
+.addr b{font-size:14px}
+.orow .nm{font-size:14px}
+.orow .op{font-size:13px}
+.orow .gift{font-size:13px}
+.orow .pr{font-size:13px}
+.orow .pr b{font-size:17px}
+.orow .btn-sub{font-size:13px}
+.pays button{font-size:13px}
+.pays button .ms{font-size:18px}
+.pays .np{font-size:22px}
+.pays .tp{font-size:18px}
+.osec>header h2{font-size:16px}
+.pays button{font-size:12px}
+.pays .np{font-size:17px}
+.pays .tp{font-size:15px}
+.ordone .hero h1{font-size:24px}
+.ordone .hero p{font-size:14px}
+.ordone .hero .no{font-size:13px}
+.ordone .hero .no b{font-size:15px}
+.ordone .box h2{font-size:16px}
+.drow{font-size:14px}
+.drow span{font-size:12px}
+.drow b{font-size:14px}
+.kv{font-size:13px}
+.kv .tot b{font-size:14px}
+.kv .tot strong{font-size:20px}
+.tipbar{font-size:13px}
+.ordone .hero h1{font-size:18px}
+.size2 b{font-size:14px}
+.rv p{font-size:13px}
+.mhero p{font-size:14px}
+.tabs2 button,.tabs2 a{font-size:14px}
+.pwbox .tools button{font-size:17px}
+.mlinks{font-size:13px}
+.divtxt{font-size:12px}
+.sns{font-size:14px}
+.joinbox .ms{font-size:18px}
+.joinbox p{font-size:12px}
+.joinbox p b{font-size:14px}
+.agreebox .ck{font-size:14px}
+.agreebox .ck a{font-size:12px}
+.sechd{font-size:16px}
+.ok-msg{font-size:12px}
+.chipsel button{font-size:13px}
+.carinfo{font-size:13px}
+.txtlink{font-size:13px}
+.method label{font-size:13px}
+.method .ms{font-size:18px}
+.notebox{font-size:12px}
+.notebox b{font-size:13px}
+.kvbox{font-size:13px}
+.okhero h2{font-size:22px}
+.okhero p{font-size:14px}
+.mhero h1{font-size:20px}
+.mhero p{font-size:13px}
+.okhero h2{font-size:18px}
+.mydash .me h2{font-size:20px}
+.mydash .me .lv{font-size:12px}
+.mydash .me .cp{font-size:12px}
+.mydash .me .cp .ms:last-child{font-size:16px}
+.mydash .me .av{font-size:22px}
+.mydash .st h3{font-size:13px}
+.mydash .st h3 .ms{font-size:14px}
+.mydash .st .v{font-size:24px}
+.mydash .st .v small{font-size:13px}
+.mydash .st .v.car{font-size:17px}
+.lnb h3{font-size:15px}
+.lnb a{font-size:13px}
+.lnb .cs h4{font-size:13px}
+.lnb .cs b{font-size:18px}
+.myh{font-size:20px}
+.flow div+div::before{font-size:16px}
+.flow b{font-size:20px}
+.periods span{font-size:12px}
+.ocard>header{font-size:13px}
+.ocard>header b{font-size:14px}
+.ocard>header span{font-size:12px}
+.ocard>header .btn-pl{font-size:12px}
+.ocard .nm{font-size:14px}
+.ocard .op{font-size:12px}
+.ocard .pr{font-size:15px}
+.myh{font-size:16px}
+.flow b{font-size:17px}
+.myhub .who .av{font-size:18px}
+.myhub .who b{font-size:17px}
+.myhub .who a{font-size:13px}
+.myhub .nx{font-size:12px}
+.myhub .three span{font-size:12px}
+.myhub .three b{font-size:16px}
+.myhub .three small{font-size:12px}
+.myhub section h3{font-size:13px}
+.myhub section>a{font-size:14px}
+.myhub section>a span:not(.ms){font-size:13px}
+.myhub section>a .ms{font-size:17px}
+.myhub .oh{font-size:15px}
+.myhub .cs2 b{font-size:14px}
+.blist a,.blist .it{font-size:14px}
+.blist .d{font-size:12px}
+.blist .no{font-size:12px}
+.faq summary{font-size:14px}
+.faq summary b{font-size:15px}
+.faq summary span.c{font-size:12px}
+.faq summary::after{font-size:18px}
+.faq .a{font-size:13px}
+.faq .a b{font-size:15px}
+.search-big .inp{font-size:15px}
+.search-big .btn{font-size:22px}
+.empty h2{font-size:17px}
+.empty p{font-size:13px}
+.prose{font-size:13px}
+.prose h2{font-size:16px}
+.jcard2 .c{font-size:12px}
+.jcard2 h3{font-size:16px}
+.jcard2 p{font-size:13px}
+.ecard .k{font-size:12px}
+.ecard h3{font-size:22px}
+.ecard p{font-size:14px}
+.ecard h3{font-size:18px}
+.blist a,.blist .it{font-size:13px}
+.search-big .inp{font-size:14px}
+.trk li{font-size:12px}
+.trk li b{font-size:14px}
+.tbl{font-size:13px}
+.cpn2 .v{font-size:22px}
+.cpn2 .b b{font-size:14px}
+.cpn2 .b p{font-size:12px}
+.ptsum div{font-size:12px}
+.ptsum b{font-size:20px}
+.mytools{font-size:13px}
+.rvw .nm{font-size:14px}
+.rvw .st2{font-size:13px}
+.rvw p{font-size:13px}
+.addr2{font-size:13px}
+.addr2 b{font-size:14px}
+.carcard .ic{font-size:24px}
+.carcard b{font-size:15px}
+.carcard p{font-size:12px}
+.warnbox{font-size:13px}
+.warnbox b{font-size:14px}
+.upl .ms{font-size:20px}
+.odet h3{font-size:16px}
+.ptsum b{font-size:16px}
+.tbl{font-size:12px}
+.ehero h1{font-size:24px}
+.npt .arr button{font-size:13px}
+.sum dl dt:not(:first-of-type){font-size:12px}
+.sum dl dd.minus{font-size:12px}
+.mhero h1{font-size:26px}
+.mhero h1{font-size:18px}
+}
+/* _03 detail: stacked option lines */
+.lines .picked{margin-top:8px}.lines .picked:first-child{margin-top:20px}
+.picked .t button{color:var(--ink2)}
+/* _03 mobile detail */
+@media (max-width:767px){
+  .det{grid-template-columns:minmax(0,1fr)!important}
+  .sub-body[style*="padding-top"]{padding-top:0!important}
+  .dinfo .badges .badge{font-size:11px;height:22px;padding:0 7px}
+  .dinfo .br{font-size:13px;margin-top:12px}
+  .dinfo h1{font-size:18px!important;line-height:1.35;margin-top:2px}
+  .dinfo .desc{font-size:13px;line-height:1.5;margin-top:6px}
+  .dinfo .rt{font-size:12px;margin-top:8px}
+  .dinfo .rt .ms{font-size:15px!important}
+  .dinfo .price .d,.dinfo .price .p{font-size:20px!important}
+  .dinfo .cpn{font-size:13px;padding:10px 12px 10px 14px}
+  .dinfo .cpn button{font-size:13px;height:34px;padding:0 14px}
+  .dinfo .pts{font-size:12px}
+  .dinfo .price,.dinfo .myfit,.dinfo .ship,.dinfo .ship + .opt{position:relative;margin-top:44px}
+  .dinfo .price::before,.dinfo .myfit::before,.dinfo .ship::before,.dinfo .ship + .opt::before{content:"";position:absolute;left:-20px;right:-20px;top:-26px;height:8px;background:#f3f2f8}
+  .dinfo .myfit{padding:16px}
+  .myfit .hd{font-size:14px}.myfit .hd .btn-pl{height:30px!important;font-size:12px!important;padding:0 10px}
+  .myfit li b{font-size:13px}.myfit li span:not(.ms){font-size:12px}.myfit li .ms{font-size:18px}
+  .ship dt,.ship dd{font-size:13px}
+  .opt .lb{font-size:14px}
+  .colors button{font-size:13px;height:40px}
+  .sets button{padding:14px}
+  .sets b{font-size:14px}.sets span,.sets em{font-size:12px}
+  .picked .t{font-size:13px}.picked .b{font-size:15px}
+  .dtot{font-size:13px}.dtot strong{font-size:18px}
+  .dbody h2,.dbody .dsec h2{font-size:17px}
+  .dbody h3{font-size:18px;margin-top:32px}
+  .dbody p{font-size:14px;line-height:1.6}
+  .related h2{font-size:17px}
+  .dtabs a{font-size:13px;height:44px}
+  .m-buybar .btn{height:48px;font-size:15px}
+}
+.sheet .box{overscroll-behavior:contain}
+.sheet .sheet-act{position:sticky;bottom:-24px;background:#fff;padding:12px 0 24px;margin-bottom:-24px;z-index:2}
+html.lock,html.lock body{overflow:hidden!important}
+@media (max-width:767px){.mo:has(> .m-subhead){display:contents}}
+@media (max-width:767px){
+  .twocol{grid-template-columns:minmax(0,1fr)!important}
+  .twocol>*,.grid2>*,.fl,.inp{min-width:0}
+  .dinfo .cpn>span{min-width:0;flex:1 1 auto}
+  .dinfo .cpn button{flex:none}
+  main.sub{overflow-x:clip}
+}
+.m-subhead{padding:0 6px;gap:0}
+.m-subhead .ms{width:40px;height:40px;flex:none;display:flex;align-items:center;justify-content:center;font-size:22px!important;font-variation-settings:'wght' 300}
+.m-subhead h1{position:static!important;width:auto!important;margin:0!important;flex:1 1 0;min-width:0;padding-left:80px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;font-size:16px!important}
+.m-subhead .sp{display:none}

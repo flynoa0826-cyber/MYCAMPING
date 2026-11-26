@@ -200,3 +200,4 @@ body.home .pc .site-footer{padding-top:0!important}
 .mcat-bn span{display:block;font-size:11px;color:#c9c3f0;margin-bottom:4px}
 .mcat-bn b{font-size:15px;line-height:1.35;letter-spacing:-.01em}
 .mcat-bn img{height:84px;width:auto;object-fit:contain;margin-right:-6px}
+.mcat-tabs button{display:flex;align-items:center;justify-content:center;text-align:center;padding:0}

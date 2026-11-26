@@ -20,9 +20,10 @@
     var i = 0, n = slides.length, timer;
     function go(k) {
       i = (k + n) % n;
-      track.style.transform = 'translateX(' + (-100 / n * i) + '%)';
+      track.style.transform = 'translate3d(' + (-Math.round(bb.clientWidth) * i) + 'px,0,0)';
       if (cur) cur.textContent = ('0' + (i + 1)).slice(-2);
     }
+    window.addEventListener('resize', function () { track.style.transition = 'none'; go(i); void track.offsetWidth; track.style.transition = ''; });
     function play() { clearInterval(timer); timer = setInterval(function () { go(i + 1); }, 4000); }
     var sx = null;
     bb.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; }, { passive: true });
@@ -180,20 +181,53 @@
   });
 
 
-  /* Mobile menu drawer */
+  /* Category menus (PC dropdown + mobile full screen) — Figma CAT / M-CAT */
   (function () {
-    var btn = document.querySelector('.mo [data-act=menu]'); if (!btn) return;
-    var cats = ['텐트', '쉘터', '타프', '테이블', '의자', '침낭·매트', '화로대', '화목난로'];
-    var d = document.createElement('div'); d.className = 'm-drawer';
-    d.innerHTML = '<div class="m-drawer-dim"></div><nav class="m-drawer-panel" aria-label="전체 메뉴">' +
-      '<div class="m-drawer-top"><a href="login.html">로그인</a><a href="join.html">회원가입</a><button type="button" class="m-drawer-x ms" aria-label="메뉴 닫기">close</button></div>' +
-      '<p class="m-drawer-h">카테고리</p>' + cats.map(function (c) { return '<a class="m-drawer-a" href="list.html">' + c + '<span class="ms">chevron_right</span></a>'; }).join('') +
-      '<p class="m-drawer-h">들살이</p><a class="m-drawer-a" href="event.html">기획전<span class="ms">chevron_right</span></a><a class="m-drawer-a" href="journal.html">캠핑 저널<span class="ms">chevron_right</span></a><a class="m-drawer-a" href="review.html">포토 후기<span class="ms">chevron_right</span></a>' +
-      '<p class="m-drawer-h">고객지원</p><a class="m-drawer-a" href="mypage.html">마이페이지<span class="ms">chevron_right</span></a><a class="m-drawer-a" href="cs.html">고객센터<span class="ms">chevron_right</span></a></nav>';
-    document.body.appendChild(d);
-    function set(o) { d.classList.toggle('on', o); document.documentElement.style.overflow = o ? 'hidden' : ''; }
-    btn.addEventListener('click', function () { set(true); });
-    d.addEventListener('click', function (e) { if (e.target.closest('.m-drawer-x') || e.target.classList.contains('m-drawer-dim')) set(false); });
+    var PCC = [['텐트', ['돔 텐트', '리빙쉘', '터널 텐트', '티피 텐트', '백패킹 텐트', '원터치 텐트']],
+      ['쉘터 · 타프', ['쉘터', '렉타 타프', '헥사 타프', '윙 타프', '타프 폴']],
+      ['체어 · 테이블', ['릴렉스 체어', '로우 체어', '롤 테이블', 'IGT 테이블', '사이드 테이블']],
+      ['침낭 · 매트', ['동계 침낭', '3계절 침낭', '에어 매트', '자충 매트', '야전 침대']],
+      ['냉난방', ['난로', '전기장판', '히터', '서큘레이터', '일산화탄소 경보기']],
+      ['차박', ['차박 매트', '도킹 텐트', '차량용 타프', '트렁크 정리함']]];
+    var MC = [['텐트', ['텐트 전체', '돔 텐트', '리빙쉘', '터널 텐트', '티피 텐트', '백패킹 텐트', '원터치 텐트', '텐트 액세서리']],
+      ['쉘터', ['쉘터 전체', '거실형 쉘터', '스크린 쉘터', '쉘터 액세서리']],
+      ['타프', ['타프 전체', '렉타 타프', '헥사 타프', '윙 타프', '타프 폴']],
+      ['체어 · 테이블', ['체어 · 테이블 전체', '릴렉스 체어', '로우 체어', '롤 테이블', 'IGT 테이블', '사이드 테이블']],
+      ['침낭 · 매트', ['침낭 · 매트 전체', '동계 침낭', '3계절 침낭', '에어 매트', '자충 매트', '야전 침대']],
+      ['키친 · 쿨러', ['키친 · 쿨러 전체', '버너 · 스토브', '코펠 · 식기', '쿨러', '키친 테이블']],
+      ['화로대 · 랜턴', ['화로대 · 랜턴 전체', '화로대', '화목난로', '랜턴', '장작 · 연료']],
+      ['냉난방', ['냉난방 전체', '난로', '전기장판', '히터', '서큘레이터', '일산화탄소 경보기']],
+      ['수납 · 가방', ['수납 · 가방 전체', '수납 박스', '캐리 백', '폴 · 팩 케이스']],
+      ['백패킹', ['백패킹 전체', '경량 텐트', '배낭', '경량 체어']],
+      ['차박', ['차박 전체', '차박 매트', '도킹 텐트', '차량용 타프', '트렁크 정리함']]];
+    /* PC dropdown */
+    var btn = document.querySelector('.pc [data-act=allcat]');
+    if (btn) {
+      var hdr = btn.closest('[data-n="헤더"]') || btn.parentNode.parentNode;
+      hdr.style.position = 'relative'; hdr.style.zIndex = 60;
+      var dd = document.createElement('div'); dd.className = 'catdd'; dd.hidden = true; dd.setAttribute('role', 'menu');
+      dd.innerHTML = '<div class="catdd-in">' + PCC.map(function (c) { return '<div class="col"><a class="h" href="list.html">' + c[0] + '</a>' + c[1].map(function (s) { return '<a href="list.html">' + s + '</a>'; }).join('') + '</div>'; }).join('') + '</div>';
+      hdr.appendChild(dd);
+      btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-haspopup', 'true');
+      function set(o) { dd.hidden = !o; btn.setAttribute('aria-expanded', o); btn.classList.toggle('on', o); }
+      btn.addEventListener('click', function (e) { e.stopPropagation(); set(dd.hidden); });
+      document.addEventListener('click', function (e) { if (!dd.hidden && !dd.contains(e.target)) set(false); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+    }
+    /* Mobile full screen */
+    var mb = document.querySelectorAll('.mo [data-act=menu]');
+    if (!mb.length) return;
+    var m = document.createElement('div'); m.className = 'mcat'; m.hidden = true; m.setAttribute('role', 'dialog'); m.setAttribute('aria-modal', 'true'); m.setAttribute('aria-label', '전체 카테고리');
+    m.innerHTML = '<header><button type="button" class="ms mcat-x" aria-label="닫기">chevron_left</button><h2>전체 카테고리</h2></header><div class="mcat-b"><nav class="l">' +
+      MC.map(function (c, i) { return '<button type="button" class="' + (i ? '' : 'on') + '" data-i="' + i + '">' + c[0] + '</button>'; }).join('') + '</nav><div class="r"></div></div>';
+    document.body.appendChild(m);
+    var r = m.querySelector('.r');
+    function show(i) { r.innerHTML = MC[i][1].map(function (s) { return '<a href="list.html">' + s + '<span class="ms">chevron_right</span></a>'; }).join(''); [].forEach.call(m.querySelectorAll('.l button'), function (b) { b.classList.toggle('on', +b.dataset.i === i); }); }
+    show(0);
+    m.querySelector('.l').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) show(+b.dataset.i); });
+    function set2(o) { m.hidden = !o; document.documentElement.style.overflow = o ? 'hidden' : ''; }
+    [].forEach.call(mb, function (b) { b.addEventListener('click', function () { set2(true); }); });
+    m.querySelector('.mcat-x').addEventListener('click', function () { set2(false); });
   })();
 
   /* Back to top */

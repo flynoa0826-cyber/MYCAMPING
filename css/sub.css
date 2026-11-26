@@ -748,3 +748,7 @@ body.bg-tint{background:var(--bg2)}
 }
 .fold{max-height:none}.fold::after{display:none}
 .stars{white-space:nowrap}
+/* Figma-DSL pages */
+.mdsl{overflow:hidden}
+.mdsl .mz{width:375px;transform-origin:0 0}
+.dsl [data-n]{box-sizing:border-box}

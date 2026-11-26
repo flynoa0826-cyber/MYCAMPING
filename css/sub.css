@@ -714,3 +714,37 @@ select.inp{appearance:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns=
 @media (max-width:767px){.pgrid.c3{grid-template-columns:repeat(2,1fr)}.ocard .bd.claimrow{grid-template-columns:auto 64px 1fr}.ocard .bd.claimrow .qty{grid-column:3}}
 @media (max-width:767px){.ehero{height:380px!important}.ehero h1{font-size:28px!important}}
 .cpn button{white-space:nowrap;flex:none}.chips>span{white-space:nowrap;flex:none}
+
+/* ===== Figma alignment fixes ===== */
+.pc2 .acts .wish{opacity:0;transition:opacity .15s}
+.pc2 .acts.has-wish .wish,.pc2:hover .acts .wish,.pc2 .acts .wish:focus-visible{opacity:1}
+@media (hover:none){.pc2 .acts .wish{opacity:1}}
+.dimg img{aspect-ratio:696/460;object-fit:cover}
+.fold{max-height:2600px}
+.picked .t button{color:var(--ink2)}
+.npt{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--ink2)}
+.npt b{color:#03c75a;font-weight:700}
+.npt .arr{display:flex;gap:2px}.npt .arr button{width:18px;height:18px;border:1px solid var(--line);font-size:14px;display:flex;align-items:center;justify-content:center}
+body.bg-tint{background:var(--bg2)}
+.sum dl dt:not(:first-of-type){font-size:13px;color:var(--mute);padding-left:4px}
+.sum dl dd.minus{font-size:13px}
+.mhero{padding:36px 20px 28px}.mhero h1{font-size:32px}.mhero p{margin-top:8px}
+.mform{gap:16px}
+.notebox{background:var(--bg2);border:0}
+.mydash{grid-template-columns:300px repeat(3,1fr)}
+.mydash .me,.mydash .st{padding:32px 28px}
+.mydash .me .cp{white-space:nowrap}
+.mylay{margin-top:32px}
+@media (max-width:767px){
+  .sets{grid-template-columns:1fr 1fr}
+  .dtot,.npay{display:grid}.dtot{display:flex}
+  .npt{display:flex}
+  .feat div,.info-t div{grid-template-columns:1fr;gap:6px}
+  .related .pgrid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0 -20px;padding:24px 20px 4px;scrollbar-width:none}
+  .related .pgrid::-webkit-scrollbar{display:none}
+  .related .pgrid>.pc2{flex:0 0 161px;scroll-snap-align:start;scroll-snap-stop:always}
+  .dimg img{aspect-ratio:1/1}
+  .mhero{padding:24px 20px 20px}.mhero h1{font-size:22px}
+}
+.fold{max-height:none}.fold::after{display:none}
+.stars{white-space:nowrap}

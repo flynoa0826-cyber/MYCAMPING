@@ -20,13 +20,13 @@
     var tags = '<p class="tag">무료배송</p>' + (p.out ? '<p class="tag out">품절</p>' : p.disc ? '' : '');
     return '<article class="pc2" data-id="' + p.id + '">' +
       '<div class="th' + (p.fit ? ' fit' : '') + '"><img src="' + src(p.img) + '" alt="' + esc(p.name) + '" loading="lazy"><div class="tags">' + tags + '</div></div>' +
-      '<div class="info"><div class="top"><p class="brand">' + esc(p.brand) + '</p><div class="acts">' +
+      '<div class="info"><div class="top"><p class="brand">' + esc(p.brand) + '</p><div class="acts' + (wish ? ' has-wish' : '') + '">' +
       '<button type="button" class="ms wish' + (wish ? ' on' : '') + '" data-act="wish" aria-label="찜하기" aria-pressed="' + wish + '">favorite</button>' +
       '<button type="button" class="ms" data-act="cart" aria-label="장바구니 담기">shopping_bag</button></div></div>' +
       '<div><p class="nm"><a href="detail.html?id=' + p.id + '">' + esc(p.name) + '</a></p><p class="spec">' + esc(p.spec) + '</p></div>' +
-      '<div><div class="dim"><b>' + p.kg.toFixed(1) + ' kg</b><i></i><span>수납 ' + p.pack + ' cm</span></div>' +
-      '<div class="fits"><span class="fit' + (p.trunk ? '' : ' over') + '">' + (p.trunk ? '트렁크 적합' : '트렁크 초과') + '</span><span class="fit' + (p.deck ? '' : ' no') + '">' + (p.deck ? '내 데크 가능' : '내 데크 초과') + '</span></div></div>' +
-      '<div><div class="pr">' + (p.disc ? '<span class="d">' + p.disc + '%</span>' : '') + '<span class="p">' + won(p.price) + '</span>' + (p.orig ? '<s>' + won(p.orig) + '</s>' : '') + '</div>' + stars(p.rate, p.rev) + '</div>' +
+      (o.compact ? '' : '<div><div class="dim"><b>' + p.kg.toFixed(1) + ' kg</b><i></i><span>수납 ' + p.pack + ' cm</span></div>' +
+      '<div class="fits"><span class="fit' + (p.trunk ? '' : ' over') + '">' + (p.trunk ? '트렁크 적합' : '트렁크 초과') + '</span><span class="fit' + (p.deck ? '' : ' no') + '">' + (p.deck ? '내 데크 가능' : '내 데크 초과') + '</span></div></div>') +
+      '<div><div class="pr">' + (p.disc ? '<span class="d">' + p.disc + '%</span>' : '') + '<span class="p">' + won(p.price) + '</span>' + (p.orig && p.disc ? '<s>' + won(p.orig) + '</s>' : '') + '</div>' + stars(p.rate, p.rev) + '</div>' +
       '</div></article>';
   }
 
@@ -52,7 +52,7 @@
     if (b.dataset.act === 'wish') {
       var w = store('mc_wish') || P.filter(function (x) { return x.wish; }).map(function (x) { return x.id; });
       var i = w.indexOf(id); if (i > -1) w.splice(i, 1); else w.push(id);
-      store('mc_wish', w); b.classList.toggle('on', i < 0); b.setAttribute('aria-pressed', i < 0);
+      store('mc_wish', w); b.classList.toggle('on', i < 0); b.setAttribute('aria-pressed', i < 0); b.parentNode.classList.toggle('has-wish', i < 0);
       toast(i < 0 ? '찜 목록에 추가했습니다.' : '찜 목록에서 삭제했습니다.');
     } else if (b.dataset.act === 'cart') cartAdd(id, 1);
   });
@@ -104,7 +104,7 @@
   if (lp) {
     var grid = $('.pgrid', lp), state = { sub: '전체', sort: '추천순', myfit: true };
     function draw() {
-      var l = P.filter(function (p) { return p.cat === '텐트' && (state.sub === '전체' || p.sub === state.sub) && (!state.myfit || p.trunk); });
+      var l = P.filter(function (p) { return p.id <= 16 && (state.sub === '전체' || p.sub === state.sub) && (!state.myfit || p.trunk); });
       var s = state.sort;
       if (s === '낮은 가격순') l.sort(function (a, b) { return a.price - b.price; });
       else if (s === '높은 가격순') l.sort(function (a, b) { return b.price - a.price; });

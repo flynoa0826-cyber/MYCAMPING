@@ -37,6 +37,7 @@
     radio('.colors button', function (b) { color = b.dataset.color; });
     radio('.sets button', function (b) { set = b.dataset.set; add = +b.dataset.add; });
     $$('[data-q]', dp).forEach(function (b) { b.addEventListener('click', function () { qty = Math.max(1, Math.min(99, qty + +b.dataset.q)); upd(); }); });
+    $('.js-pickx', dp).addEventListener('click', function () { qty = 1; $$('.colors button', dp)[0].click(); $$('.sets button', dp)[0].click(); });
     $('.js-qty', dp).addEventListener('change', function () { qty = Math.max(1, Math.min(99, parseInt(this.value, 10) || 1)); upd(); });
     function addCart() {
       var c = cart(), f = c.filter(function (x) { return x.id === p.id; })[0];
@@ -67,7 +68,7 @@
       secs.forEach(function (s, i) { if (s && s.offsetTop <= y) cur = i; });
       tabs.forEach(function (a, i) { a.classList.toggle('on', i === cur); });
     }, { passive: true });
-    var rel = $('.js-related', dp); if (rel) rel.innerHTML = [17, 18, 19, 20].map(function (i) { return M.card(M.byId(i)); }).join('');
+    var rel = $('.js-related', dp); if (rel) rel.innerHTML = [17, 18, 19, 20].map(function (i) { return M.card(M.byId(i), { compact: true }); }).join('');
     upd();
   }
 
@@ -102,12 +103,12 @@
     }
     function totals(c) {
       var sel = c.filter(function (x) { return x.on; }), sum = 0, dis = 0, kg = 0, vol = 0;
-      sel.forEach(function (it) { var p = M.byId(it.id); sum += ((p.orig || p.price) + (it.add || 0)) * it.qty; dis += ((p.orig || p.price) - p.price) * it.qty; kg += p.kg * it.qty; vol += Math.round(p.pack * 0.65) * it.qty; });
+      sel.forEach(function (it) { var p = M.byId(it.id); sum += ((p.orig || p.price) + (it.add || 0)) * it.qty; dis += ((p.orig || p.price) - p.price) * it.qty; kg += p.kg * it.qty; vol += (p.vol || Math.round(p.pack * 0.9)) * it.qty; });
       var cpn = sel.length ? 10000 : 0, tot = sum - dis - cpn;
       $('.js-sum', cp).textContent = won(sum); $('.js-dis', cp).textContent = dis ? '−' + won(dis) : '0원';
       $('.js-cpnv', cp).textContent = cpn ? '−' + won(cpn) : '0원';
       $$('.js-tot').forEach(function (e) { e.textContent = won(tot); });
-      $('.js-pt', cp).textContent = won(Math.round(tot / 100));
+      $('.js-pt', cp).textContent = won(Math.round((sum - dis) / 100));
       $$('.js-ordcnt').forEach(function (e) { e.textContent = sel.length; });
       var pct = Math.min(100, Math.round(vol / 675 * 100));
       $('.js-meter', cp).style.width = pct + '%';
@@ -134,7 +135,7 @@
     });
     $$('.js-order').forEach(function (b) { b.addEventListener('click', function () { M.store('mc_buynow', null); location.href = 'order.html'; }); });
     $$('.js-applycpn').forEach(function (b) { b.addEventListener('click', function () { b.closest('.sheet').classList.remove('on'); M.toast('쿠폰을 적용했습니다.'); }); });
-    var rel2 = $('.js-related', cp); if (rel2) rel2.innerHTML = [17, 18, 19, 20].map(function (i) { return M.card(M.byId(i)); }).join('');
+    var rel2 = $('.js-related', cp); if (rel2) rel2.innerHTML = [17, 18, 19, 20].map(function (i) { return M.card(M.byId(i), { compact: true }); }).join('');
     draw();
   }
 
@@ -158,7 +159,7 @@
       $('.js-sum', op).textContent = won(sum); $('.js-dis', op).textContent = dis ? '−' + won(dis) : '0원';
       $('.js-cpnv', op).textContent = cpn ? '−' + won(cpn) : '0원'; $('.js-used', op).textContent = used ? '−' + won(used) : '0원';
       $$('.js-tot').forEach(function (e) { e.textContent = won(t); });
-      $('.js-pt', op).textContent = won(Math.round(t / 100));
+      $('.js-pt', op).textContent = won(Math.round((sum - dis) / 100));
       M.store('mc_order_tot', { sum: sum, dis: dis, cpn: cpn, used: used, tot: t, items: items });
     }
     $$('.osec>header', op).forEach(function (h) { h.setAttribute('role', 'button'); h.setAttribute('tabindex', '0'); h.addEventListener('click', function () { var s = h.parentNode; s.classList.toggle('closed'); h.setAttribute('aria-expanded', !s.classList.contains('closed')); }); });
@@ -189,6 +190,6 @@
     $('.js-items', dn).innerHTML = o.items.map(function (it) { var p = M.byId(it.id); return '<div class="drow"><img src="' + M.src(p.img) + '" alt=""><div>' + M.esc(p.short || p.name) + '<span>' + M.esc(it.opt || p.opt || '기본') + ' · ' + it.qty + '개</span></div><b>' + won((p.price + (it.add || 0)) * it.qty) + '</b></div>'; }).join('');
     $('.js-icnt', dn).textContent = o.items.length;
     $('.js-sum', dn).textContent = won(o.sum); $('.js-dis', dn).textContent = '−' + won(o.dis); $('.js-cpnv', dn).textContent = '−' + won(o.cpn);
-    $('.js-tot', dn).textContent = won(o.tot); $('.js-pt', dn).textContent = won(Math.round(o.tot / 100));
+    $('.js-tot', dn).textContent = won(o.tot); $('.js-pt', dn).textContent = won(Math.round((o.sum - o.dis) / 100));
   }
 })();

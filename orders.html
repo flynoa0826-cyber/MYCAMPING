@@ -388,25 +388,37 @@
             <p style="flex:none;position:relative;font:400 13px/1.19 'Noto Sans KR',sans-serif;letter-spacing:-0.01em;color:#4a4868;white-space:nowrap;">구매 확정</p>
           </div>
         </div>
-        <div data-n="목록_묶음" style="display:flex;flex-direction:column;gap:16px;align-items:flex-start;align-self:stretch;position:relative;">
-          <div data-n="기간" style="display:flex;justify-content:space-between;align-items:center;align-self:stretch;position:relative;">
-            <div data-n="기간_선택" style="display:flex;gap:8px;align-items:flex-start;flex:none;position:relative;">
-              <div data-n="Chip" style="display:flex;padding:0px 16px 0px 16px;justify-content:center;align-items:center;flex:none;height:40px;position:relative;background:#ffffff;border:1px solid #dcdaec;border-radius:999px;">
-                <p style="flex:none;position:relative;font:500 16px/1.6 'Noto Sans KR',sans-serif;letter-spacing:-0.005em;color:#14123a;text-align:center;white-space:nowrap;">1개월</p>
+        <div data-n="목록_묶음" style="display:flex;flex-direction:column;gap:30px;align-items:flex-start;align-self:stretch;position:relative;">
+          <div data-n="검색_기간" style="display:flex;flex-direction:column;gap:16px;align-items:flex-start;align-self:stretch;position:relative;">
+            <div class="js-osearch" data-n="주문_검색" style="display:flex;gap:10px;align-items:center;align-self:stretch;position:relative;">
+              <div data-n="Input" style="display:flex;flex-direction:column;align-items:flex-start;flex:1 1 0;min-width:0;position:relative;">
+                <div data-n="Field" style="display:flex;gap:8px;padding:0px 16px 0px 16px;align-items:center;align-self:stretch;height:52px;flex-shrink:0;position:relative;background:#ffffff;border:1px solid #dcdaec;border-radius:8px;overflow:hidden;">
+                  <p style="flex:1 1 0;min-width:0;position:relative;font:400 16px/1.6 'Noto Sans KR',sans-serif;letter-spacing:-0.005em;color:#a9a7bf;word-break:keep-all;overflow-wrap:break-word;">상품명 또는 주문번호를 입력해 주세요</p>
+                </div>
               </div>
-              <div data-n="Chip" style="display:flex;padding:0px 16px 0px 16px;justify-content:center;align-items:center;flex:none;height:40px;position:relative;background:#14123a;border-radius:999px;">
-                <p style="flex:none;position:relative;font:500 16px/1.6 'Noto Sans KR',sans-serif;letter-spacing:-0.005em;color:#ffffff;text-align:center;white-space:nowrap;">3개월</p>
-              </div>
-              <div data-n="Chip" style="display:flex;padding:0px 16px 0px 16px;justify-content:center;align-items:center;flex:none;height:40px;position:relative;background:#ffffff;border:1px solid #dcdaec;border-radius:999px;">
-                <p style="flex:none;position:relative;font:500 16px/1.6 'Noto Sans KR',sans-serif;letter-spacing:-0.005em;color:#14123a;text-align:center;white-space:nowrap;">6개월</p>
-              </div>
-              <div data-n="Chip" style="display:flex;padding:0px 16px 0px 16px;justify-content:center;align-items:center;flex:none;height:40px;position:relative;background:#ffffff;border:1px solid #dcdaec;border-radius:999px;">
-                <p style="flex:none;position:relative;font:500 16px/1.6 'Noto Sans KR',sans-serif;letter-spacing:-0.005em;color:#14123a;text-align:center;white-space:nowrap;">전체</p>
+              <div class="js-ogo" data-n="검색_버튼" style="display:flex;padding:0px 20px 0px 20px;justify-content:center;align-items:center;width:120px;flex-shrink:0;height:52px;position:relative;background:#14123a;border-radius:4px;">
+                <p style="flex:none;position:relative;font:700 16px/1.6 'Noto Sans KR',sans-serif;letter-spacing:-0.005em;color:#ffffff;text-align:center;white-space:nowrap;">검색</p>
               </div>
             </div>
-            <p style="flex:none;position:relative;font:400 14px/1.19 'Noto Sans KR',sans-serif;letter-spacing:-0.01em;color:#6b6988;white-space:nowrap;">2026.08.26 ~ 2026.11.26 · 주문 32건</p>
+            <div data-n="기간" style="display:flex;justify-content:space-between;align-items:center;align-self:stretch;position:relative;">
+              <div data-n="기간_선택" style="display:flex;gap:8px;align-items:flex-start;flex:none;position:relative;">
+                <div data-n="Chip" style="display:flex;padding:0px 16px 0px 16px;justify-content:center;align-items:center;flex:none;height:40px;position:relative;background:#ffffff;border:1px solid #dcdaec;border-radius:999px;">
+                  <p style="flex:none;position:relative;font:500 16px/1.6 'Noto Sans KR',sans-serif;letter-spacing:-0.005em;color:#14123a;text-align:center;white-space:nowrap;">1개월</p>
+                </div>
+                <div data-n="Chip" style="display:flex;padding:0px 16px 0px 16px;justify-content:center;align-items:center;flex:none;height:40px;position:relative;background:#14123a;border-radius:999px;">
+                  <p style="flex:none;position:relative;font:500 16px/1.6 'Noto Sans KR',sans-serif;letter-spacing:-0.005em;color:#ffffff;text-align:center;white-space:nowrap;">3개월</p>
+                </div>
+                <div data-n="Chip" style="display:flex;padding:0px 16px 0px 16px;justify-content:center;align-items:center;flex:none;height:40px;position:relative;background:#ffffff;border:1px solid #dcdaec;border-radius:999px;">
+                  <p style="flex:none;position:relative;font:500 16px/1.6 'Noto Sans KR',sans-serif;letter-spacing:-0.005em;color:#14123a;text-align:center;white-space:nowrap;">6개월</p>
+                </div>
+                <div data-n="Chip" style="display:flex;padding:0px 16px 0px 16px;justify-content:center;align-items:center;flex:none;height:40px;position:relative;background:#ffffff;border:1px solid #dcdaec;border-radius:999px;">
+                  <p style="flex:none;position:relative;font:500 16px/1.6 'Noto Sans KR',sans-serif;letter-spacing:-0.005em;color:#14123a;text-align:center;white-space:nowrap;">전체</p>
+                </div>
+              </div>
+              <p class="js-ocnt" style="flex:none;position:relative;font:400 14px/1.19 'Noto Sans KR',sans-serif;letter-spacing:-0.01em;color:#6b6988;white-space:nowrap;">2026.08.26 ~ 2026.11.26 · 주문 32건</p>
+            </div>
           </div>
-          <div data-n="주문_목록" style="display:flex;flex-direction:column;gap:12px;align-items:flex-start;align-self:stretch;position:relative;">
+          <div class="js-olist" data-n="주문_목록" style="display:flex;flex-direction:column;gap:12px;align-items:flex-start;align-self:stretch;position:relative;">
             <div data-n="주문_·_20261123-000128" style="display:flex;flex-direction:column;align-items:flex-start;align-self:stretch;position:relative;background:#ffffff;border:1px solid #dcdaec;border-radius:8px;overflow:hidden;">
               <div data-n="주문_헤더" style="display:flex;gap:8px;padding:12px 20px 12px 20px;align-items:center;align-self:stretch;position:relative;background:#f6f5fb;">
                 <div data-n="주문_정보" style="display:flex;gap:12px;align-items:center;flex:1 1 0;min-width:0;position:relative;">
@@ -682,8 +694,25 @@
               </div>
             </div>
           </div>
+          <div class="js-oempty" data-n="검색_결과_없음" style="display:flex;flex-direction:column;gap:24px;padding:48px 0px 48px 0px;align-items:center;align-self:stretch;position:relative;">
+            <div data-n="묶음" style="display:flex;flex-direction:column;gap:8px;align-items:center;align-self:stretch;position:relative;">
+              <div data-n="아이콘" style="display:flex;justify-content:center;align-items:center;width:80px;height:80px;flex-shrink:0;position:relative;background:#eceaf8;border-radius:999px;">
+                <p class="ms" style="flex:none;position:relative;font-family:'Material Symbols Rounded';font-size:36px;line-height:36px;font-weight:400;color:#14123a;white-space:nowrap;">search_off</p>
+              </div>
+              <p class="js-oetitle" style="align-self:stretch;position:relative;font:700 20px/1.4 'Noto Sans KR',sans-serif;letter-spacing:-0.015em;color:#14123a;text-align:center;word-break:keep-all;overflow-wrap:break-word;">‘랜턴’에 해당하는 주문이 없습니다</p>
+              <p style="align-self:stretch;position:relative;font:400 16px/1.6 'Noto Sans KR',sans-serif;letter-spacing:-0.005em;color:#4a4868;text-align:center;word-break:keep-all;overflow-wrap:break-word;">상품명 또는 주문번호를 다시 확인해 주세요.<br>조회 기간을 ‘전체’로 바꾸면 이전 주문까지 찾을 수 있습니다.</p>
+            </div>
+            <div data-n="버튼" style="display:flex;gap:8px;align-items:flex-start;flex:none;position:relative;">
+              <div class="js-oall" data-n="Button" style="display:flex;padding:0px 20px 0px 20px;justify-content:center;align-items:center;flex:none;height:48px;position:relative;background:#4a3aa8;border-radius:4px;">
+                <p style="flex:none;position:relative;font:700 16px/1.6 'Noto Sans KR',sans-serif;letter-spacing:-0.005em;color:#ffffff;text-align:center;white-space:nowrap;">전체 기간에서 검색</p>
+              </div>
+              <div class="js-oreset" data-n="Button" style="display:flex;padding:0px 20px 0px 20px;justify-content:center;align-items:center;flex:none;height:48px;position:relative;background:#ffffff;border:1px solid #4a3aa8;border-radius:4px;">
+                <p style="flex:none;position:relative;font:700 16px/1.6 'Noto Sans KR',sans-serif;letter-spacing:-0.005em;color:#4a3aa8;text-align:center;white-space:nowrap;">검색 초기화</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div data-n="페이지네이션" style="display:flex;padding:8px 0px 0px 0px;justify-content:center;align-items:flex-start;align-self:stretch;position:relative;">
+        <div class="js-opag" data-n="페이지네이션" style="display:flex;padding:8px 0px 0px 0px;justify-content:center;align-items:flex-start;align-self:stretch;position:relative;">
           <div data-n="Pagination" style="display:flex;gap:8px;justify-content:center;align-items:center;flex:none;position:relative;">
             <div data-n="«" style="display:flex;padding:0px 8px 0px 8px;justify-content:center;align-items:center;flex:none;height:40px;min-width:40px;position:relative;background:#ffffff;border:1px solid #dcdaec;border-radius:4px;overflow:hidden;">
               <p class="ms" style="flex:none;position:relative;font-family:'Material Symbols Rounded';font-size:20px;line-height:20px;font-weight:400;color:#14123a;white-space:nowrap;">keyboard_double_arrow_left</p>
@@ -772,24 +801,38 @@
         </div>
       </div>
     </div>
-    <div data-n="기간" style="display:flex;gap:8px;padding:16px 20px 16px 20px;align-items:center;align-self:stretch;position:relative;background:#ffffff;">
-      <div data-n="기간_선택" style="display:flex;gap:8px;align-items:flex-start;flex:none;position:relative;">
-        <div data-n="Chip" style="display:flex;padding:0px 16px 0px 16px;justify-content:center;align-items:center;flex:none;height:40px;position:relative;background:#ffffff;border:1px solid #dcdaec;border-radius:999px;">
-          <p style="flex:none;position:relative;font:500 14px/1.6 'Noto Sans KR',sans-serif;letter-spacing:-0.005em;color:#14123a;text-align:center;white-space:nowrap;">1개월</p>
+    <div data-n="검색_기간" style="display:flex;flex-direction:column;padding:0px 0px 14px 0px;align-items:flex-start;align-self:stretch;position:relative;">
+      <div data-n="주문_검색_래퍼" style="display:flex;flex-direction:column;padding:16px 20px 0px 20px;align-items:flex-start;align-self:stretch;position:relative;background:#ffffff;">
+        <div class="js-osearch" data-n="주문_검색" style="display:flex;gap:10px;align-items:center;align-self:stretch;position:relative;">
+          <div data-n="Input" style="display:flex;flex-direction:column;align-items:flex-start;flex:1 1 0;min-width:0;position:relative;">
+            <div data-n="Field" style="display:flex;gap:8px;padding:0px 16px 0px 16px;align-items:center;align-self:stretch;height:52px;flex-shrink:0;position:relative;background:#ffffff;border:1px solid #dcdaec;border-radius:8px;overflow:hidden;">
+              <p style="flex:1 1 0;min-width:0;position:relative;font:400 14px/1.6 'Noto Sans KR',sans-serif;letter-spacing:-0.005em;color:#a9a7bf;word-break:keep-all;overflow-wrap:break-word;">상품명·주문번호 검색</p>
+            </div>
+          </div>
+          <div class="js-ogo" data-n="검색_버튼" style="display:flex;padding:0px 20px 0px 20px;justify-content:center;align-items:center;width:72px;flex-shrink:0;height:52px;position:relative;background:#14123a;border-radius:4px;">
+            <p style="flex:none;position:relative;font:700 14px/1.6 'Noto Sans KR',sans-serif;letter-spacing:-0.005em;color:#ffffff;text-align:center;white-space:nowrap;">검색</p>
+          </div>
         </div>
-        <div data-n="Chip" style="display:flex;padding:0px 16px 0px 16px;justify-content:center;align-items:center;flex:none;height:40px;position:relative;background:#14123a;border-radius:999px;">
-          <p style="flex:none;position:relative;font:500 14px/1.6 'Noto Sans KR',sans-serif;letter-spacing:-0.005em;color:#ffffff;text-align:center;white-space:nowrap;">3개월</p>
-        </div>
-        <div data-n="Chip" style="display:flex;padding:0px 16px 0px 16px;justify-content:center;align-items:center;flex:none;height:40px;position:relative;background:#ffffff;border:1px solid #dcdaec;border-radius:999px;">
-          <p style="flex:none;position:relative;font:500 14px/1.6 'Noto Sans KR',sans-serif;letter-spacing:-0.005em;color:#14123a;text-align:center;white-space:nowrap;">6개월</p>
-        </div>
-        <div data-n="Chip" style="display:flex;padding:0px 16px 0px 16px;justify-content:center;align-items:center;flex:none;height:40px;position:relative;background:#ffffff;border:1px solid #dcdaec;border-radius:999px;">
-          <p style="flex:none;position:relative;font:500 14px/1.6 'Noto Sans KR',sans-serif;letter-spacing:-0.005em;color:#14123a;text-align:center;white-space:nowrap;">전체</p>
+      </div>
+      <div data-n="기간" style="display:flex;gap:8px;padding:16px 20px 16px 20px;align-items:center;align-self:stretch;position:relative;background:#ffffff;">
+        <div data-n="기간_선택" style="display:flex;gap:8px;align-items:flex-start;flex:none;position:relative;">
+          <div data-n="Chip" style="display:flex;padding:0px 16px 0px 16px;justify-content:center;align-items:center;flex:none;height:40px;position:relative;background:#ffffff;border:1px solid #dcdaec;border-radius:999px;">
+            <p style="flex:none;position:relative;font:500 14px/1.6 'Noto Sans KR',sans-serif;letter-spacing:-0.005em;color:#14123a;text-align:center;white-space:nowrap;">1개월</p>
+          </div>
+          <div data-n="Chip" style="display:flex;padding:0px 16px 0px 16px;justify-content:center;align-items:center;flex:none;height:40px;position:relative;background:#14123a;border-radius:999px;">
+            <p style="flex:none;position:relative;font:500 14px/1.6 'Noto Sans KR',sans-serif;letter-spacing:-0.005em;color:#ffffff;text-align:center;white-space:nowrap;">3개월</p>
+          </div>
+          <div data-n="Chip" style="display:flex;padding:0px 16px 0px 16px;justify-content:center;align-items:center;flex:none;height:40px;position:relative;background:#ffffff;border:1px solid #dcdaec;border-radius:999px;">
+            <p style="flex:none;position:relative;font:500 14px/1.6 'Noto Sans KR',sans-serif;letter-spacing:-0.005em;color:#14123a;text-align:center;white-space:nowrap;">6개월</p>
+          </div>
+          <div data-n="Chip" style="display:flex;padding:0px 16px 0px 16px;justify-content:center;align-items:center;flex:none;height:40px;position:relative;background:#ffffff;border:1px solid #dcdaec;border-radius:999px;">
+            <p style="flex:none;position:relative;font:500 14px/1.6 'Noto Sans KR',sans-serif;letter-spacing:-0.005em;color:#14123a;text-align:center;white-space:nowrap;">전체</p>
+          </div>
         </div>
       </div>
     </div>
-    <div data-n="주문_목록" style="display:flex;flex-direction:column;gap:12px;padding:0px 20px 0px 20px;align-items:flex-start;align-self:stretch;position:relative;background:#ffffff;">
-      <p style="flex:none;position:relative;font:400 12px/1.19 'Noto Sans KR',sans-serif;letter-spacing:0em;color:#6b6988;white-space:nowrap;">2026.08.26 ~ 2026.11.26 · 주문 32건</p>
+    <div class="js-olist" data-n="주문_목록" style="display:flex;flex-direction:column;gap:12px;padding:20px 20px 0px 20px;align-items:flex-start;align-self:stretch;position:relative;background:#ffffff;">
+      <p class="js-ocnt" style="flex:none;position:relative;font:400 12px/1.19 'Noto Sans KR',sans-serif;letter-spacing:0em;color:#6b6988;white-space:nowrap;">2026.08.26 ~ 2026.11.26 · 주문 32건</p>
       <div data-n="주문_·_20261123-000128" style="display:flex;flex-direction:column;align-items:flex-start;align-self:stretch;position:relative;background:#ffffff;border:1px solid #dcdaec;border-radius:8px;overflow:hidden;">
         <div data-n="주문_헤더" style="display:flex;gap:8px;padding:12px 16px 12px 16px;align-items:center;align-self:stretch;position:relative;background:#f6f5fb;">
           <div data-n="주문_정보" style="display:flex;flex-direction:column;gap:2px;align-items:flex-start;flex:1 1 0;min-width:0;position:relative;">
@@ -1064,8 +1107,25 @@
           </div>
         </div>
       </div>
+      <div class="js-oempty" data-n="검색_결과_없음" style="display:flex;flex-direction:column;gap:24px;padding:48px 0px 48px 0px;align-items:center;align-self:stretch;position:relative;">
+        <div data-n="묶음" style="display:flex;flex-direction:column;gap:8px;align-items:center;align-self:stretch;position:relative;">
+          <div data-n="아이콘" style="display:flex;justify-content:center;align-items:center;width:80px;height:80px;flex-shrink:0;position:relative;background:#eceaf8;border-radius:999px;">
+            <p class="ms" style="flex:none;position:relative;font-family:'Material Symbols Rounded';font-size:36px;line-height:36px;font-weight:400;color:#14123a;white-space:nowrap;">search_off</p>
+          </div>
+          <p class="js-oetitle" style="align-self:stretch;position:relative;font:700 17px/1.4 'Noto Sans KR',sans-serif;letter-spacing:-0.015em;color:#14123a;text-align:center;word-break:keep-all;overflow-wrap:break-word;">‘랜턴’에 해당하는 주문이 없습니다</p>
+          <p style="align-self:stretch;position:relative;font:400 14px/1.6 'Noto Sans KR',sans-serif;letter-spacing:-0.005em;color:#4a4868;text-align:center;word-break:keep-all;overflow-wrap:break-word;">상품명 또는 주문번호를 다시 확인해 주세요.<br>조회 기간을 ‘전체’로 바꾸면<br>이전 주문까지 찾을 수 있습니다.</p>
+        </div>
+        <div data-n="버튼" style="display:flex;gap:8px;align-items:flex-start;align-self:stretch;position:relative;">
+          <div class="js-oall" data-n="Button" style="display:flex;padding:0px 20px 0px 20px;justify-content:center;align-items:center;flex:1 1 0;min-width:0;height:48px;position:relative;background:#4a3aa8;border-radius:4px;">
+            <p style="flex:none;position:relative;font:700 14px/1.6 'Noto Sans KR',sans-serif;letter-spacing:-0.005em;color:#ffffff;text-align:center;white-space:nowrap;">전체 기간에서 검색</p>
+          </div>
+          <div class="js-oreset" data-n="Button" style="display:flex;padding:0px 20px 0px 20px;justify-content:center;align-items:center;flex:1 1 0;min-width:0;height:48px;position:relative;background:#ffffff;border:1px solid #4a3aa8;border-radius:4px;">
+            <p style="flex:none;position:relative;font:700 14px/1.6 'Noto Sans KR',sans-serif;letter-spacing:-0.005em;color:#4a3aa8;text-align:center;white-space:nowrap;">검색 초기화</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div data-n="페이지네이션" style="display:flex;padding:16px 0px 0px 0px;justify-content:center;align-items:flex-start;align-self:stretch;position:relative;background:#ffffff;">
+    <div class="js-opag" data-n="페이지네이션" style="display:flex;padding:16px 0px 0px 0px;justify-content:center;align-items:flex-start;align-self:stretch;position:relative;background:#ffffff;">
       <div data-n="Pagination" style="display:flex;gap:8px;justify-content:center;align-items:center;flex:none;position:relative;">
         <div data-n="‹" style="display:flex;padding:0px 7px 0px 7px;justify-content:center;align-items:center;flex:none;height:36px;min-width:36px;position:relative;background:#ffffff;border:1px solid #dcdaec;border-radius:4px;overflow:hidden;">
           <p class="ms" style="flex:none;position:relative;font-family:'Material Symbols Rounded';font-size:20px;line-height:20px;font-weight:400;color:#14123a;white-space:nowrap;">chevron_left</p>

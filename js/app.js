@@ -256,6 +256,7 @@
     var mb = document.querySelectorAll('.mo [data-act=menu]');
     if (!mb.length) return;
     var m = document.createElement('div'); m.className = 'mcat'; m.hidden = true; m.setAttribute('role', 'dialog'); m.setAttribute('aria-modal', 'true'); m.setAttribute('aria-label', '전체 카테고리');
+    var BLG = { '스노우피크': 'snowpeak', '헬리녹스': 'helinox', '콜맨': 'coleman', '그라운드커버': 'groundcover', '코베아': 'kovea', '제이크라': 'jakelah', '스노우라인': 'snowline', 'HXO': 'hxo', '하임플래닛': 'heimplanet', '도쿄크래프트': 'tokyocrafts', '위너웰': 'winnerwell', '디얼스': 'dears', '텐트마크디자인': 'tentmark' };
     var BR = ['스노우피크', '헬리녹스', '콜맨', '그라운드커버', '코베아', '제이크라', '스노우라인', 'HXO', '하임플래닛', '도쿄크래프트', '위너웰', '폴러스터프', '디얼스', '텐트마크디자인'];
     function logged() { try { return localStorage.getItem('mc_login') === '1'; } catch (e) { return false; } }
     function cartN() { try { var c = JSON.parse(localStorage.getItem('mc_cart') || 'null'); return c ? c.length : 3; } catch (e) { return 3; } }
@@ -266,7 +267,7 @@
     }
     m.innerHTML = '<header><button type="button" class="ms mcat-x" aria-label="닫기">chevron_left</button><h2>전체 메뉴</h2></header><div class="mcat-memw"></div>' +
       '<div class="mcat-tabs" role="tablist"><button type="button" class="on" data-v="cat" role="tab" aria-selected="true">카테고리</button><button type="button" data-v="brand" role="tab" aria-selected="false">브랜드</button></div>' +
-      '<div class="mcat-brand" hidden>' + BR.map(function (b) { return '<a href="list.html?brand=' + encodeURIComponent(b) + '">' + b + '</a>'; }).join('') + '</div>' +
+      '<div class="mcat-brand" hidden>' + BR.map(function (b) { var lg = BLG[b]; return '<a href="list.html?brand=' + encodeURIComponent(b) + '"><span class="blg' + (lg ? ' blg-' + lg : ' blg-none') + '">' + (lg ? '<img src="img/brand/' + lg + '.webp" alt="" loading="lazy">' : '<i>' + b.charAt(0) + '</i>') + '</span><span class="bnm">' + b + '</span></a>'; }).join('') + '</div>' +
       '<div class="mcat-b"><nav class="l">' +
       MC.map(function (c, i) { return '<button type="button" class="' + (i ? '' : 'on') + '" data-i="' + i + '">' + c[0] + '</button>'; }).join('') + '</nav><div class="r"></div></div>' +
       '<a class="mcat-bn" href="join.html"><div><span>신규 회원 혜택</span><b>첫 주문 무료 배송<br>+ 10,000원 쿠폰</b></div><img src="img/c010c054feb51f98be3073edc481332d970f0b07.png" alt=""></a>';

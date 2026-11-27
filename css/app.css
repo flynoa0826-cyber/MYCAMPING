@@ -281,3 +281,10 @@ body.home .pc .site-footer{padding-top:0!important}
 @media (hover:none){
   .rcard:hover,.jcard:hover,.deal:hover,.jcard2:hover{transform:none!important;box-shadow:none!important}
 }
+/* _22 full menu brand logos */
+.mcat-brand a{gap:10px;padding:0 12px}
+.mcat-brand .blg{flex:none;width:48px;height:26px;display:flex;align-items:center;justify-content:center}
+.mcat-brand .blg img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.mcat-brand .blg-hxo img{filter:brightness(0)}
+.mcat-brand .blg-none i{width:26px;height:26px;border-radius:50%;background:#eceaf8;color:#14123a;font:700 12px/26px 'Noto Sans KR',sans-serif;font-style:normal;text-align:center}
+.mcat-brand .bnm{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}

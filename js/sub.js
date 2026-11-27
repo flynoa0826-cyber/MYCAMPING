@@ -168,3 +168,30 @@
   });
   upd();
 })();
+
+/* _22 orders: search my orders by product name / order number */
+(function () {
+  document.querySelectorAll('.js-osearch').forEach(function (bar) {
+    var root = bar.closest('.pc,.mo') || document;
+    var list = root.querySelector('.js-olist'), empty = root.querySelector('.js-oempty'), cnt = root.querySelector('.js-ocnt'), pag = root.querySelector('.js-opag');
+    if (!list || !empty) return;
+    var cards = [].slice.call(list.querySelectorAll('[data-n^="주문_·_"]'));
+    var cnt0 = cnt ? cnt.textContent : '';
+    var norm = function (s) { return (s || '').toLowerCase().replace(/[\s\-·()]/g, ''); };
+    function inp() { return bar.querySelector('input'); }
+    function run() {
+      var el = inp(); var q = el ? el.value.trim() : ''; var nq = norm(q), n = 0;
+      cards.forEach(function (c) { var hit = !nq || norm(c.textContent).indexOf(nq) > -1; c.classList.toggle('js-ohide', !hit); if (hit) n++; });
+      if (cnt) cnt.textContent = q ? '‘' + q + '’ 검색 결과 ' + n + '건' : cnt0;
+      var none = q && !n;
+      empty.classList.toggle('on', !!none);
+      var t = empty.querySelector('.js-oetitle'); if (t) t.textContent = '‘' + q + '’에 해당하는 주문이 없습니다';
+      if (pag) pag.classList.toggle('js-ohide', !!q);
+    }
+    var go = bar.querySelector('.js-ogo'); if (go) { go.style.cursor = 'pointer'; go.setAttribute('role', 'button'); go.tabIndex = 0; go.addEventListener('click', run); go.addEventListener('keydown', function (e) { if (e.key === 'Enter') run(); }); }
+    bar.addEventListener('keydown', function (e) { if (e.key === 'Enter' && e.target.tagName === 'INPUT') { e.preventDefault(); run(); } });
+    var rs = empty.querySelector('.js-oreset'); if (rs) { rs.style.cursor = 'pointer'; rs.setAttribute('role', 'button'); rs.addEventListener('click', function () { var el = inp(); if (el) { el.value = ''; el.focus(); } run(); }); }
+    var all = empty.querySelector('.js-oall'); if (all) { all.style.cursor = 'pointer'; all.setAttribute('role', 'button'); all.addEventListener('click', function () {
+      var chip = [].slice.call(root.querySelectorAll('[data-n="Chip"]')).filter(function (c) { return c.textContent.trim() === '전체'; })[0]; if (chip) chip.click(); run(); }); }
+  });
+})();

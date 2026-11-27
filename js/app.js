@@ -419,3 +419,34 @@
     { img: 'd0f2061dd0735da101fc52bb0ec48f87d7d45562', href: 'detail.html?id=2' }
   ], function (d) { var im = rc.querySelector('.qimg'); if (im) im.style.backgroundImage = 'url(' + src(d.img) + ')'; rc.setAttribute('href', d.href); });
 })();
+
+/* _16 mobile floating quick menu (all pages) */
+(function () {
+  if (!document.querySelector('.mo')) return;
+  var src = function (h) { return 'img/' + ((window.IMG && IMG[h]) || h + '.jpg'); };
+  var DEF = [{ id: 21, img: 'ace784aa62a7fec2fa29e4f2f8d54e13c83da4e1' }, { id: 1, img: '0523b071f3149486d40f11a5ae0474f0932ff271' }, { id: 2, img: 'd0f2061dd0735da101fc52bb0ec48f87d7d45562' }];
+  var rec; try { rec = JSON.parse(localStorage.getItem('mc_recent') || 'null'); } catch (e) {}
+  if (!rec || !rec.length) rec = DEF; rec = rec.slice(0, 3);
+  var wn = 0; try { var w = JSON.parse(localStorage.getItem('mc_wish') || 'null'); if (w) wn = w.length; else if (window.PRODUCTS) wn = PRODUCTS.filter(function (p) { return p.wish; }).length; } catch (e) {}
+  var it = function (cls, x, y, inner, attr) { return '<a class="mq-i ' + cls + '" style="--x:' + x + ';--y:' + y + '" ' + attr + '>' + inner + '</a>'; };
+  var h = '<div class="mq-dim"></div><div class="mq" aria-label="퀵메뉴">';
+  rec.forEach(function (r, i) { h += it('mq-rc', 0, i + 1, '<img src="' + src(r.img) + '" alt="">', 'href="detail.html?id=' + r.id + '" aria-label="최근 본 상품 ' + (i + 1) + '"'); });
+  h += it('', 1, 1, '<span class="ms">support_agent</span>', 'href="faq.html" aria-label="고객센터"');
+  h += it('', 2, 1, '<span class="ms">favorite</span>' + (wn ? '<i class="bdg">' + (wn > 99 ? '99+' : wn) + '</i>' : ''), 'href="wishlist.html" aria-label="찜목록"');
+  h += it('', 1, 0, '<span class="ms">menu</span>', 'href="#" role="button" data-mq="menu" aria-label="전체메뉴"');
+  h += it('', 2, 0, '<span class="ms">home</span>', 'href="index.html" aria-label="홈"');
+  h += '<button type="button" class="mq-btn" aria-expanded="false" aria-label="퀵메뉴 열기"><span class="ms">apps</span></button></div>';
+  var box = document.createElement('div'); box.className = 'mqw'; box.innerHTML = h; document.body.appendChild(box);
+  var btn = box.querySelector('.mq-btn'), ic = btn.querySelector('.ms');
+  function set(on) { box.classList.toggle('open', on); btn.setAttribute('aria-expanded', on); btn.setAttribute('aria-label', on ? '퀵메뉴 닫기' : '퀵메뉴 열기'); ic.textContent = on ? 'close' : 'apps'; }
+  btn.addEventListener('click', function () { set(!box.classList.contains('open')); });
+  box.querySelector('.mq-dim').addEventListener('click', function () { set(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+  box.querySelector('[data-mq=menu]').addEventListener('click', function (e) { e.preventDefault(); set(false); var m = document.querySelector('.mo [data-act=menu]'); if (m) m.click(); });
+  function place() {
+    var top = window.innerHeight;
+    ['.m-tabbar', '.m-buybar', '.m-orderbar'].forEach(function (s) { document.querySelectorAll(s).forEach(function (el) { if (getComputedStyle(el).position === 'fixed' && el.offsetHeight) top = Math.min(top, el.getBoundingClientRect().top); }); });
+    box.style.setProperty('--mqb', (window.innerHeight - top + 16) + 'px');
+  }
+  window.addEventListener('resize', place); window.addEventListener('load', place); place(); setTimeout(place, 300);
+})();

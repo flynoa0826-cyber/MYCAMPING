@@ -18,6 +18,7 @@
     $('.js-price', dp).textContent = won(p.price);
     $('.js-pt', dp).textContent = won(Math.round(p.price / 100));
     document.title = p.name + ' · 들살이';
+    try { var rc = JSON.parse(localStorage.getItem('mc_recent') || '[]').filter(function (x) { return x.id !== p.id; }); rc.unshift({ id: p.id, img: p.img }); localStorage.setItem('mc_recent', JSON.stringify(rc.slice(0, 3))); } catch (e) {}
     var gal = p.gal || [p.img], main = $('.js-main', dp);
     main.src = M.src(gal[0]); main.alt = p.name;
     $('.js-thumbs', dp).innerHTML = gal.map(function (h, i) { return '<button type="button" class="' + (i ? '' : 'on') + '" data-src="' + M.src(h) + '" aria-label="이미지 ' + (i + 1) + '"><img src="' + M.src(h) + '" alt=""></button>'; }).join('');

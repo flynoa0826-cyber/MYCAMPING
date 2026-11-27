@@ -208,3 +208,7 @@ body.home .pc .site-footer{padding-top:0!important}
 .hind button{width:6px!important;height:6px!important;padding:0;border-radius:3px;background:#d9d9d9!important;transition:width .25s ease,background-color .25s ease;font-size:0!important}
 .hind button.on{width:28px!important;background:#14123a!important}
 .hind button:disabled{background:#d9d9d9}
+/* _12 billboard HD crop focus */
+.pc [data-n="Slide_1"]{background-position:0 0,center 62%!important}
+.pc [data-n="Slide_2"]{background-position:0 0,center 92%!important}
+.pc [data-n="Slide_3"]{background-position:0 0,center 82%!important}

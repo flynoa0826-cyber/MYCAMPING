@@ -212,3 +212,10 @@ body.home .pc .site-footer{padding-top:0!important}
 .pc [data-n="Slide_1"]{background-position:0 0,center 62%!important}
 .pc [data-n="Slide_2"]{background-position:0 0,center 92%!important}
 .pc [data-n="Slide_3"]{background-position:0 0,center 82%!important}
+/* _15 mobile billboard */
+.mo [data-n="Slide_1"]{background-position:0 0,58% center!important}
+.mo [data-n="Slide_2"]{background-position:0 0,50% center!important}
+.mo [data-n="Slide_3"]{background-position:0 0,50% center!important}
+.mo [data-n="장_표시"]{z-index:3;justify-content:flex-end}
+[data-js=billboard].drag{cursor:grabbing}
+.pc [data-js=billboard]{cursor:grab;user-select:none}

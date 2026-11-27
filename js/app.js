@@ -58,6 +58,11 @@
     }
     window.addEventListener('resize', function () { setX(-i * W(), false); track.style.transition = ''; });
     function play() { clearInterval(timer); timer = setInterval(function () { go(1); }, 4000); }
+    var mx = null, moved = false;
+    bb.addEventListener('mousedown', function (e) { if (e.button !== 0 || e.target.closest('a,button,[data-act]')) return; mx = e.clientX; moved = false; bb.classList.add('drag'); e.preventDefault(); });
+    window.addEventListener('mouseup', function (e) { if (mx === null) return; var dx = e.clientX - mx; mx = null; bb.classList.remove('drag'); if (Math.abs(dx) > 50) { moved = true; go(dx < 0 ? 1 : -1); play(); } });
+    bb.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+    bb.addEventListener('dragstart', function (e) { e.preventDefault(); });
     var sx = null;
     bb.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; }, { passive: true });
     bb.addEventListener('touchend', function (e) { if (sx === null) return; var dx = e.changedTouches[0].clientX - sx; sx = null; if (Math.abs(dx) > 40) { go(dx < 0 ? 1 : -1); play(); } });

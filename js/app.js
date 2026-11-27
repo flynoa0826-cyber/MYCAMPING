@@ -13,26 +13,59 @@
   }
   fitPc(); window.addEventListener('resize', fitPc);
 
-  /* Billboard: background slides, fixed copy, 4s autoplay, loop */
+  /* Billboard: per-slide copy, seamless infinite loop both ways (1→2→3→1 / 3→2→1→3), 4s autoplay */
+  var BB = [
+    { eye: 'DOME TENT · 4P', t: '불을 밝히면,<br>숲이 거실이 됩니다', d: '4인이 머물기 넉넉한 실내 공간을 갖췄습니다.<br>4계절 립스탑 원단이 바람과 추위를 막아 줍니다.', v: ['랜드네스트 돔 M', '4인', '립스탑', '4계절'], href: 'detail.html?id=7' },
+    { eye: 'TIPI TENT · 3P', t: '별이 지는 밤에도,<br>불빛이 머뭅니다', d: '면혼방 원단이 결로를 줄여 줍니다.<br>난로와 함께 쓰기 좋은 겨울 텐트입니다.', v: ['몰티하우스 미니 탄', '3인', 'TC 면혼방', '4계절'], href: 'detail.html?id=4' },
+    { eye: 'DOME TENT · 2P', t: '나무 그늘 아래,<br>오후가 천천히 흐릅니다', d: '전실이 넓어 짐을 두고도 여유롭습니다.<br>주말에 가볍게 떠나기 좋은 2인용 돔입니다.', v: ['투어링 돔 LX+', '2인', '폴리에스터', '3계절'], href: 'detail.html?id=6' }
+  ];
   $$('[data-js=billboard]').forEach(function (bb) {
     var track = $('.bb-track', bb), slides = $$('.bb-slide', bb), cur = $('.bb-cur', bb);
     if (!track || slides.length < 2) return;
-    var i = 0, n = slides.length, timer;
-    function go(k) {
-      i = (k + n) % n;
-      track.style.transform = 'translate3d(' + (-Math.round(bb.clientWidth) * i) + 'px,0,0)';
-      if (cur) cur.textContent = ('0' + (i + 1)).slice(-2);
+    var i = 0, n = slides.length, timer, busy = false, W = function () { return Math.round(bb.clientWidth); };
+    var copyEls = [$('.bb-eye', bb), $('.bb-title', bb), $('.bb-desc', bb), $('.bb-sub', bb)].concat($$('.bb-v', bb)).filter(Boolean);
+    copyEls.forEach(function (e) { e.style.transition = 'opacity .35s ease'; });
+    function copy(k) {
+      var d = BB[k % BB.length]; if (!d) return;
+      copyEls.forEach(function (e) { e.style.opacity = '0'; });
+      setTimeout(function () {
+        var e;
+        if ((e = $('.bb-eye', bb))) e.textContent = d.eye;
+        if ((e = $('.bb-title', bb))) e.innerHTML = d.t;
+        if ((e = $('.bb-desc', bb))) e.innerHTML = d.d;
+        if ((e = $('.bb-sub', bb))) e.textContent = d.v[0] + ' · ' + d.v[1] + ' · ' + d.v[3];
+        $$('.bb-v', bb).forEach(function (x, j) { x.textContent = d.v[j]; });
+        $$('a[href^="detail.html"]', bb).forEach(function (a) { a.setAttribute('href', d.href); });
+        copyEls.forEach(function (x) { x.style.opacity = '1'; });
+      }, 250);
     }
-    window.addEventListener('resize', function () { track.style.transition = 'none'; go(i); void track.offsetWidth; track.style.transition = ''; });
-    function play() { clearInterval(timer); timer = setInterval(function () { go(i + 1); }, 4000); }
+    function setX(x, anim) { track.style.transition = anim ? '' : 'none'; track.style.transform = 'translate3d(' + x + 'px,0,0)'; if (!anim) void track.offsetWidth; }
+    function go(dir) {
+      if (busy) return; busy = true;
+      var from = i, to = (i + dir + n) % n, w = W();
+      var wrapF = dir > 0 && from === n - 1, wrapB = dir < 0 && from === 0;
+      if (wrapF) slides[0].style.transform = 'translateX(' + (n * w) + 'px)';
+      if (wrapB) { slides[n - 1].style.transform = 'translateX(' + (-n * w) + 'px)'; }
+      var x = wrapF ? -n * w : wrapB ? w : -to * w;
+      setX(x, true);
+      i = to; if (cur) cur.textContent = ('0' + (i + 1)).slice(-2); copy(i);
+      var done = function () {
+        track.removeEventListener('transitionend', done); clearTimeout(t);
+        if (wrapF || wrapB) { slides[0].style.transform = ''; slides[n - 1].style.transform = ''; setX(-i * w, false); track.style.transition = ''; }
+        busy = false;
+      };
+      var t = setTimeout(done, 1000); track.addEventListener('transitionend', done);
+    }
+    window.addEventListener('resize', function () { setX(-i * W(), false); track.style.transition = ''; });
+    function play() { clearInterval(timer); timer = setInterval(function () { go(1); }, 4000); }
     var sx = null;
     bb.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; }, { passive: true });
-    bb.addEventListener('touchend', function (e) { if (sx === null) return; var dx = e.changedTouches[0].clientX - sx; sx = null; if (Math.abs(dx) > 40) { go(i + (dx < 0 ? 1 : -1)); play(); } });
+    bb.addEventListener('touchend', function (e) { if (sx === null) return; var dx = e.changedTouches[0].clientX - sx; sx = null; if (Math.abs(dx) > 40) { go(dx < 0 ? 1 : -1); play(); } });
     bb.addEventListener('click', function (e) {
       var b = e.target.closest('[data-act]');
       if (!b) return;
-      if (b.dataset.act === 'bb-prev') { go(i - 1); play(); }
-      if (b.dataset.act === 'bb-next') { go(i + 1); play(); }
+      if (b.dataset.act === 'bb-prev') { go(-1); play(); }
+      if (b.dataset.act === 'bb-next') { go(1); play(); }
     });
     play();
   });
@@ -341,4 +374,43 @@
   };
   document.addEventListener('click', function (e) { var j = e.target.closest('.pc a[data-lo="1"]'); if (j) { e.preventDefault(); try { localStorage.removeItem('mc_login'); } catch (x) {} location.reload(); } });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', window.MC_hdr); else window.MC_hdr();
+})();
+
+/* _13 PC quick menu: footer-aware position + banner / recent carousels */
+(function () {
+  var q = document.querySelector('.pc .quickmenu'); if (!q) return;
+  var src = function (h) { return 'img/' + ((window.IMG && IMG[h]) || h + '.jpg'); };
+  function place() {
+    var f = document.querySelector('.pc .site-footer'); if (!f) return;
+    var gap = 24, base = 50, ft = f.getBoundingClientRect().top, vh = window.innerHeight;
+    var over = (vh - base) - (ft - gap);
+    q.style.transform = over > 0 ? 'translateY(' + (-over) + 'px)' : '';
+  }
+  window.addEventListener('scroll', place, { passive: true }); window.addEventListener('resize', place); window.addEventListener('load', place); place();
+  if (window.ResizeObserver) new ResizeObserver(place).observe(document.body);
+  function car(box, data, render) {
+    if (!box) return; var i = 0, cur = box.querySelector('.qcur'), tot = cur && cur.nextElementSibling;
+    if (tot) tot.textContent = '/ ' + data.length;
+    function show() { render(data[i]); if (cur) cur.textContent = i + 1; }
+    [['.qprev', -1], ['.qnext', 1]].forEach(function (a) {
+      var b = box.querySelector(a[0]); if (!b) return;
+      b.style.cursor = 'pointer'; b.setAttribute('role', 'button'); b.setAttribute('aria-label', a[1] < 0 ? '이전' : '다음'); b.tabIndex = 0;
+      var go = function (e) { e.preventDefault(); e.stopPropagation(); i = (i + a[1] + data.length) % data.length; show(); };
+      b.addEventListener('click', go); b.addEventListener('keydown', function (e) { if (e.key === 'Enter') go(e); });
+      var pad = b.parentElement; pad.style.cursor = 'default';
+    });
+    show();
+  }
+  var bn = q.querySelector('.qbn');
+  car(bn, [
+    { t: '동계 캠핑\n준비전', img: 'a29c6ad364f24b6d266c9f5b509398b0d367fcdf', href: 'event-detail.html' },
+    { t: '차박 입문\n기획전', img: '51277b9e815b0917da65d96983c5bc00f506a3b6', href: 'event.html' },
+    { t: '쉘터 브랜드\n위크', img: '0523b071f3149486d40f11a5ae0474f0932ff271', href: 'event.html' }
+  ], function (d) { var im = bn.querySelector('.qimg'), t = bn.querySelector('.qtit'); if (im) im.style.backgroundImage = 'url(' + src(d.img) + ')'; if (t) t.innerHTML = d.t.replace('\n', '<br>'); bn.setAttribute('href', d.href); });
+  var rc = q.querySelector('.qrc');
+  car(rc, [
+    { img: 'ace784aa62a7fec2fa29e4f2f8d54e13c83da4e1', href: 'detail.html' },
+    { img: '0523b071f3149486d40f11a5ae0474f0932ff271', href: 'detail.html?id=1' },
+    { img: 'd0f2061dd0735da101fc52bb0ec48f87d7d45562', href: 'detail.html?id=2' }
+  ], function (d) { var im = rc.querySelector('.qimg'); if (im) im.style.backgroundImage = 'url(' + src(d.img) + ')'; rc.setAttribute('href', d.href); });
 })();

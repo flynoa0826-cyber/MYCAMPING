@@ -438,6 +438,11 @@
   h += '<button type="button" class="mq-btn" aria-expanded="false" aria-label="퀵메뉴 열기"><span class="ms">apps</span></button></div>';
   var box = document.createElement('div'); box.className = 'mqw'; box.innerHTML = h; document.body.appendChild(box);
   var btn = box.querySelector('.mq-btn'), ic = btn.querySelector('.ms');
+  /* staggered order: recent(near→far) → 찜 → 고객센터 → 홈 → 전체메뉴; close = reverse */
+  var seq = [].slice.call(box.querySelectorAll('.mq-rc')).map(function (e, i) { return [e, i * 40]; }), b0 = rec.length * 40;
+  [['[aria-label="찜목록"]', 0], ['[aria-label="고객센터"]', 20], ['[aria-label="홈"]', 40], ['[aria-label="전체메뉴"]', 60]].forEach(function (x) { seq.push([box.querySelector('.mq-i' + x[0]), b0 + x[1]]); });
+  var mx = Math.max.apply(null, seq.map(function (x) { return x[1]; }));
+  seq.forEach(function (x) { x[0].style.setProperty('--d', x[1] + 'ms'); x[0].style.setProperty('--dc', (mx - x[1]) + 'ms'); });
   function set(on) { box.classList.toggle('open', on); btn.setAttribute('aria-expanded', on); btn.setAttribute('aria-label', on ? '퀵메뉴 닫기' : '퀵메뉴 열기'); ic.textContent = on ? 'close' : 'apps'; }
   btn.addEventListener('click', function () { set(!box.classList.contains('open')); });
   box.querySelector('.mq-dim').addEventListener('click', function () { set(false); });

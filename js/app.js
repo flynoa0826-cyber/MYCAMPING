@@ -428,7 +428,7 @@
   var rec; try { rec = JSON.parse(localStorage.getItem('mc_recent') || 'null'); } catch (e) {}
   if (!rec || !rec.length) rec = DEF; rec = rec.slice(0, 3);
   var wn = 0; try { var w = JSON.parse(localStorage.getItem('mc_wish') || 'null'); if (w) wn = w.length; else if (window.PRODUCTS) wn = PRODUCTS.filter(function (p) { return p.wish; }).length; } catch (e) {}
-  var it = function (cls, x, y, inner, attr) { return '<a class="mq-i ' + cls + '" style="--x:' + x + ';--y:' + y + '" ' + attr + '>' + inner + '</a>'; };
+  var it = function (cls, x, y, inner, attr) { inner = inner.replace(/(<span class="ms">[^<]*<\/span><b class="mq-l">.*?<\/b>)/, '<span class="mq-f">$1</span>'); return '<a class="mq-i ' + cls + '" style="--x:' + x + ';--y:' + y + '" ' + attr + '>' + inner + '</a>'; };
   var h = '<div class="mq-dim"></div><div class="mq" aria-label="퀵메뉴">';
   rec.forEach(function (r, i) { h += it('mq-rc', 0, i + 1, '<img src="' + src(r.img) + '" alt="">', 'href="detail.html?id=' + r.id + '" aria-label="최근 본 상품 ' + (i + 1) + '"'); });
   h += it('', 1, 1, '<span class="ms">support_agent</span><b class="mq-l">고객<br>센터</b>', 'href="faq.html" aria-label="고객센터"');
@@ -443,8 +443,19 @@
   [['[aria-label="찜목록"]', 0], ['[aria-label="고객센터"]', 20], ['[aria-label="홈"]', 40], ['[aria-label="전체메뉴"]', 60]].forEach(function (x) { seq.push([box.querySelector('.mq-i' + x[0]), b0 + x[1]]); });
   var mx = Math.max.apply(null, seq.map(function (x) { return x[1]; }));
   seq.forEach(function (x) { x[0].style.setProperty('--d', x[1] + 'ms'); x[0].style.setProperty('--dc', (mx - x[1]) + 'ms'); });
-  function set(on) { box.classList.toggle('open', on); btn.setAttribute('aria-expanded', on); btn.setAttribute('aria-label', on ? '퀵메뉴 닫기' : '퀵메뉴 열기'); ic.textContent = on ? 'close' : 'apps'; }
+  function set(on) { box.classList.toggle('open', on); flipReset(on); btn.setAttribute('aria-expanded', on); btn.setAttribute('aria-label', on ? '퀵메뉴 닫기' : '퀵메뉴 열기'); ic.textContent = on ? 'close' : 'apps'; }
   btn.addEventListener('click', function () { set(!box.classList.contains('open')); });
+  /* idle flip: 1.5s no touch -> rotateY icon<->label every 1.5s, wave order 찜→고객센터→홈→전체메뉴 */
+  var fl = ['찜목록', '고객센터', '홈', '전체메뉴'].map(function (l, i) { var e = box.querySelector('.mq-i[aria-label="' + l + '"]'); e.style.setProperty('--fd', (i * 80) + 'ms'); return e; });
+  var ft = null, fi = null, fs = false;
+  function flipAll(v) { fs = v; fl.forEach(function (e) { e.classList.toggle('flip', v); }); }
+  function flipReset(on) {
+    clearTimeout(ft); clearInterval(fi); if (fs) flipAll(false);
+    if (on) ft = setTimeout(function () { flipAll(true); fi = setInterval(function () { flipAll(!fs); }, 1500); }, 500 + 1500);
+  }
+  var idle = function () { if (box.classList.contains('open')) flipReset(true); };
+  ['touchstart', 'pointerdown', 'wheel', 'scroll', 'keydown'].forEach(function (t) { window.addEventListener(t, idle, { passive: true, capture: true }); });
+  fl.forEach(function (el) { el.addEventListener('mouseenter', function (e) { if (e.pointerType === 'touch') return; el.classList.add('hv'); }); el.addEventListener('mouseleave', function () { el.classList.remove('hv'); }); });
   box.querySelector('.mq-dim').addEventListener('click', function () { set(false); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
   box.querySelector('[data-mq=menu]').addEventListener('click', function (e) { e.preventDefault(); set(false); var m = document.querySelector('.mo [data-act=menu]'); if (m) m.click(); });

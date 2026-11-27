@@ -244,3 +244,15 @@ body.home .pc .site-footer{padding-top:0!important}
   .mq-i .bdg{position:absolute;top:-4px;right:-4px;min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:#a94c1b;color:#fff;font:700 10px/16px 'Noto Sans KR',sans-serif;font-style:normal;text-align:center}
 }
 @media (prefers-reduced-motion:reduce){.mq-i,.mqw.open .mq-i,.mq-dim{transition:none!important}}
+/* _18 quick menu item hover label */
+@media (max-width:767px){
+  .mq-i .ms{transition:opacity .15s}
+  .mq-l{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;font:400 11px/1.2 'Noto Sans KR',sans-serif;letter-spacing:-.02em;color:#14123a;opacity:0;transition:opacity .15s;pointer-events:none;word-break:keep-all}
+  .mq-i:focus-visible .ms,.mq-i:active .ms{opacity:0}
+  .mq-i:focus-visible .mq-l,.mq-i:active .mq-l{opacity:1}
+  .mq-i{-webkit-tap-highlight-color:transparent}
+}
+@media (max-width:767px) and (hover:hover){
+  .mq-i:hover .ms{opacity:0}
+  .mq-i:hover .mq-l{opacity:1}
+}

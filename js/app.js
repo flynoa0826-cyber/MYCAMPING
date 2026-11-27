@@ -431,10 +431,10 @@
   var it = function (cls, x, y, inner, attr) { return '<a class="mq-i ' + cls + '" style="--x:' + x + ';--y:' + y + '" ' + attr + '>' + inner + '</a>'; };
   var h = '<div class="mq-dim"></div><div class="mq" aria-label="퀵메뉴">';
   rec.forEach(function (r, i) { h += it('mq-rc', 0, i + 1, '<img src="' + src(r.img) + '" alt="">', 'href="detail.html?id=' + r.id + '" aria-label="최근 본 상품 ' + (i + 1) + '"'); });
-  h += it('', 1, 1, '<span class="ms">support_agent</span>', 'href="faq.html" aria-label="고객센터"');
-  h += it('', 2, 1, '<span class="ms">favorite</span>' + (wn ? '<i class="bdg">' + (wn > 99 ? '99+' : wn) + '</i>' : ''), 'href="wishlist.html" aria-label="찜목록"');
-  h += it('', 1, 0, '<span class="ms">menu</span>', 'href="#" role="button" data-mq="menu" aria-label="전체메뉴"');
-  h += it('', 2, 0, '<span class="ms">home</span>', 'href="index.html" aria-label="홈"');
+  h += it('', 1, 1, '<span class="ms">support_agent</span><b class="mq-l">고객<br>센터</b>', 'href="faq.html" aria-label="고객센터"');
+  h += it('', 2, 1, '<span class="ms">favorite</span><b class="mq-l">찜<br>목록</b>' + (wn ? '<i class="bdg">' + (wn > 99 ? '99+' : wn) + '</i>' : ''), 'href="wishlist.html" aria-label="찜목록"');
+  h += it('', 1, 0, '<span class="ms">menu</span><b class="mq-l">전체<br>메뉴</b>', 'href="#" role="button" data-mq="menu" aria-label="전체메뉴"');
+  h += it('', 2, 0, '<span class="ms">home</span><b class="mq-l">홈</b>', 'href="index.html" aria-label="홈"');
   h += '<button type="button" class="mq-btn" aria-expanded="false" aria-label="퀵메뉴 열기"><span class="ms">apps</span></button></div>';
   var box = document.createElement('div'); box.className = 'mqw'; box.innerHTML = h; document.body.appendChild(box);
   var btn = box.querySelector('.mq-btn'), ic = btn.querySelector('.ms');

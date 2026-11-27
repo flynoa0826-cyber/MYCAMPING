@@ -267,3 +267,17 @@ body.home .pc .site-footer{padding-top:0!important}
   .mq-f>.mq-l{background:#14123a;border:2px solid #fff;box-shadow:0 0 0 1px rgba(20,18,58,.12),0 4px 12px rgba(20,18,58,.24);color:#fff;font-weight:700}
   .mq-f>.mq-l::after{background:linear-gradient(90deg,rgba(255,255,255,.14),rgba(255,255,255,0) 60%)}
 }
+/* _21 billboard counter right-anchored (all widths) */
+@media (max-width:767px){.mo [data-n="장_표시"]{left:auto!important;right:20px}}
+/* _21 quick menu: 375 base 52/48, scales with viewport width */
+@media (max-width:767px){
+  .mq{width:52px;height:52px;transform:scale(var(--mqk,1));transform-origin:100% 100%}
+  .mq-i{left:2px;top:2px;width:48px;height:48px}
+  .mqw.open .mq-i{transform:translate(calc(var(--x) * -60px),calc(var(--y) * -60px)) scale(1)}
+  .mq-f{width:48px;height:48px}
+  .mq-f>.ms{font-size:24px}
+}
+/* _21 no hover-lift on touch devices (sticky :hover on iOS clips cards) */
+@media (hover:none){
+  .rcard:hover,.jcard:hover,.deal:hover,.jcard2:hover{transform:none!important;box-shadow:none!important}
+}

@@ -463,6 +463,7 @@
     var top = window.innerHeight;
     ['.m-tabbar', '.m-buybar', '.m-orderbar'].forEach(function (s) { document.querySelectorAll(s).forEach(function (el) { if (getComputedStyle(el).position === 'fixed' && el.offsetHeight) top = Math.min(top, el.getBoundingClientRect().top); }); });
     box.style.setProperty('--mqb', (window.innerHeight - top + 16) + 'px');
+    box.style.setProperty('--mqk', Math.min(1.2, Math.max(0.96, window.innerWidth / 375)).toFixed(3));
   }
   window.addEventListener('resize', place); window.addEventListener('load', place); place(); setTimeout(place, 300);
 })();

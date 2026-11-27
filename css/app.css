@@ -288,3 +288,18 @@ body.home .pc .site-footer{padding-top:0!important}
 .mcat-brand .blg-hxo img{filter:brightness(0)}
 .mcat-brand .blg-none i{width:26px;height:26px;border-radius:50%;background:#eceaf8;color:#14123a;font:700 12px/26px 'Noto Sans KR',sans-serif;font-style:normal;text-align:center}
 .mcat-brand .bnm{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* _23 quick menu ad banner (3 slides) */
+.mq-bn{display:none}
+@media (max-width:767px){
+  .mq-bn{display:block;position:absolute;left:-282px;top:-58px;width:152px;height:108px;border-radius:8px;overflow:hidden;box-shadow:0 4px 12px rgba(20,18,58,.14);background:#fff;
+    transform-origin:100% 100%;transform:translate(130px,0) scale(.6);opacity:0;visibility:hidden;transition:transform .2s cubic-bezier(.4,0,.6,1) var(--dc,0ms),opacity .14s ease-in var(--dc,0ms),visibility 0s linear calc(var(--dc,0ms) + 200ms)}
+  .mqw.open .mq-bn{transform:none;opacity:1;visibility:visible;transition:transform .28s cubic-bezier(.3,1.2,.5,1) var(--d,0ms),opacity .14s ease-out var(--d,0ms),visibility 0s linear var(--d,0ms)}
+  .mq-bt{display:flex;height:100%;transition:transform .35s cubic-bezier(.3,.7,.3,1)}
+  .mq-bt a{flex:0 0 100%;height:100%;position:relative;background-size:cover;background-position:center;display:flex;align-items:flex-end;padding:0 12px 26px;text-decoration:none}
+  .mq-bt a::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,18,58,0) 35%,rgba(20,18,58,.78))}
+  .mq-bt b{position:relative;color:#fff;font:700 13px/1.35 'Noto Sans KR',sans-serif;letter-spacing:-.01em}
+  .mq-bd{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:4px}
+  .mq-bd i{width:6px;height:6px;border-radius:3px;background:rgba(255,255,255,.5);transition:width .25s}
+  .mq-bd i.on{width:16px;background:#fff}
+}
+@media (prefers-reduced-motion:reduce){.mq-bn,.mqw.open .mq-bn,.mq-bt{transition:none!important}}

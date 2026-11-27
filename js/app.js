@@ -436,6 +436,8 @@
   h += it('', 2, 1, '<span class="ms">favorite</span><b class="mq-l">찜<br>목록</b>', 'href="wishlist.html" aria-label="찜목록"');
   h += it('', 1, 0, '<span class="ms">menu</span><b class="mq-l">전체<br>메뉴</b>', 'href="#" role="button" data-mq="menu" aria-label="전체메뉴"');
   h += it('', 2, 0, '<span class="ms">home</span><b class="mq-l">홈</b>', 'href="index.html" aria-label="홈"');
+  var BNS = [['a29c6ad364f24b6d266c9f5b509398b0d367fcdf', '동계 캠핑<br>준비전', 'event-detail.html'], ['51277b9e815b0917da65d96983c5bc00f506a3b6', '차박 입문<br>기획전', 'event.html'], ['0523b071f3149486d40f11a5ae0474f0932ff271', '쉘터 브랜드<br>위크', 'event.html']];
+  h += '<div class="mq-bn" aria-label="광고 배너"><div class="mq-bt">' + BNS.map(function (b) { return '<a href="' + b[2] + '" style="background-image:url(' + src(b[0]) + ')"><b>' + b[1] + '</b></a>'; }).join('') + '</div><div class="mq-bd">' + BNS.map(function (b, i) { return '<i' + (i ? '' : ' class="on"') + '></i>'; }).join('') + '</div></div>';
   h += '<button type="button" class="mq-btn" aria-expanded="false" aria-label="퀵메뉴 열기"><span class="ms">apps</span></button></div>';
   var box = document.createElement('div'); box.className = 'mqw'; box.innerHTML = h; document.body.appendChild(box);
   var btn = box.querySelector('.mq-btn'), ic = btn.querySelector('.ms');
@@ -444,7 +446,16 @@
   [['[aria-label="찜목록"]', 0], ['[aria-label="고객센터"]', 20], ['[aria-label="홈"]', 40], ['[aria-label="전체메뉴"]', 60]].forEach(function (x) { seq.push([box.querySelector('.mq-i' + x[0]), b0 + x[1]]); });
   var mx = Math.max.apply(null, seq.map(function (x) { return x[1]; }));
   seq.forEach(function (x) { x[0].style.setProperty('--d', x[1] + 'ms'); x[0].style.setProperty('--dc', (mx - x[1]) + 'ms'); });
-  function set(on) { box.classList.toggle('open', on); flipReset(on); btn.setAttribute('aria-expanded', on); btn.setAttribute('aria-label', on ? '퀵메뉴 닫기' : '퀵메뉴 열기'); ic.textContent = on ? 'close' : 'apps'; }
+  var bnEl = box.querySelector('.mq-bn'), bt = bnEl.querySelector('.mq-bt'), bds = [].slice.call(bnEl.querySelectorAll('.mq-bd i')), bi = 0, bto = null;
+  bnEl.style.setProperty('--d', (mx + 40) + 'ms'); bnEl.style.setProperty('--dc', '0ms');
+  function bgo(i) { bi = (i + BNS.length) % BNS.length; bt.style.transform = 'translateX(' + (-100 * bi) + '%)'; bds.forEach(function (d, k) { d.classList.toggle('on', k === bi); }); }
+  function bstart() { clearInterval(bto); bto = setInterval(function () { bgo(bi + 1); }, 3000); }
+  var bx = null, bmv = false;
+  bnEl.addEventListener('touchstart', function (e) { bx = e.touches[0].clientX; bmv = false; clearInterval(bto); }, { passive: true });
+  bnEl.addEventListener('touchmove', function (e) { if (bx !== null && Math.abs(e.touches[0].clientX - bx) > 8) bmv = true; }, { passive: true });
+  bnEl.addEventListener('touchend', function (e) { if (bx === null) return; var dx = e.changedTouches[0].clientX - bx; if (Math.abs(dx) > 24) bgo(bi + (dx < 0 ? 1 : -1)); bx = null; if (box.classList.contains('open')) bstart(); });
+  bnEl.addEventListener('click', function (e) { if (bmv) { e.preventDefault(); bmv = false; } });
+  function set(on) { box.classList.toggle('open', on); flipReset(on); if (typeof bstart === 'function') { if (on) { bgo(0); bstart(); } else clearInterval(bto); } btn.setAttribute('aria-expanded', on); btn.setAttribute('aria-label', on ? '퀵메뉴 닫기' : '퀵메뉴 열기'); ic.textContent = on ? 'close' : 'apps'; }
   btn.addEventListener('click', function () { set(!box.classList.contains('open')); });
   /* idle flip: 1.5s no touch -> rotateY icon<->label every 1.5s, wave order 찜→고객센터→홈→전체메뉴 */
   var fl = ['찜목록', '고객센터', '홈', '전체메뉴'].map(function (l, i) { var e = box.querySelector('.mq-i[aria-label="' + l + '"]'); e.style.setProperty('--fd', (i * 80) + 'ms'); return e; });

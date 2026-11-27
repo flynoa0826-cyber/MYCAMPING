@@ -432,7 +432,7 @@
   var h = '<div class="mq-dim"></div><div class="mq" aria-label="퀵메뉴">';
   rec.forEach(function (r, i) { h += it('mq-rc', 0, i + 1, '<img src="' + src(r.img) + '" alt="">', 'href="detail.html?id=' + r.id + '" aria-label="최근 본 상품 ' + (i + 1) + '"'); });
   h += it('', 1, 1, '<span class="ms">support_agent</span><b class="mq-l">고객<br>센터</b>', 'href="faq.html" aria-label="고객센터"');
-  h += it('', 2, 1, '<span class="ms">favorite</span><b class="mq-l">찜<br>목록</b>' + (wn ? '<i class="bdg">' + (wn > 99 ? '99+' : wn) + '</i>' : ''), 'href="wishlist.html" aria-label="찜목록"');
+  h += it('', 2, 1, '<span class="ms">favorite</span><b class="mq-l">찜<br>목록</b>', 'href="wishlist.html" aria-label="찜목록"');
   h += it('', 1, 0, '<span class="ms">menu</span><b class="mq-l">전체<br>메뉴</b>', 'href="#" role="button" data-mq="menu" aria-label="전체메뉴"');
   h += it('', 2, 0, '<span class="ms">home</span><b class="mq-l">홈</b>', 'href="index.html" aria-label="홈"');
   h += '<button type="button" class="mq-btn" aria-expanded="false" aria-label="퀵메뉴 열기"><span class="ms">apps</span></button></div>';
@@ -451,7 +451,7 @@
   function flipAll(v) { fs = v; fl.forEach(function (e) { e.classList.toggle('flip', v); }); }
   function flipReset(on) {
     clearTimeout(ft); clearInterval(fi); if (fs) flipAll(false);
-    if (on) ft = setTimeout(function () { flipAll(true); fi = setInterval(function () { flipAll(!fs); }, 1500); }, 500 + 1500);
+    if (on) ft = setTimeout(function () { flipAll(true); fi = setInterval(function () { flipAll(!fs); }, 3100); }, 500 + 1500);
   }
   var idle = function () { if (box.classList.contains('open')) flipReset(true); };
   ['touchstart', 'pointerdown', 'wheel', 'scroll', 'keydown'].forEach(function (t) { window.addEventListener(t, idle, { passive: true, capture: true }); });

@@ -262,3 +262,8 @@ body.home .pc .site-footer{padding-top:0!important}
   .mq-f>.ms{transition:opacity .3s}
   .mq-i.flip .mq-l,.mq-i.hv .mq-l{opacity:1}.mq-i.flip .ms,.mq-i.hv .ms{opacity:0}
 }
+/* _21 quick menu back face: dark blue + white outline, white bold label */
+@media (max-width:767px){
+  .mq-f>.mq-l{background:#14123a;border:2px solid #fff;box-shadow:0 0 0 1px rgba(20,18,58,.12),0 4px 12px rgba(20,18,58,.24);color:#fff;font-weight:700}
+  .mq-f>.mq-l::after{background:linear-gradient(90deg,rgba(255,255,255,.14),rgba(255,255,255,0) 60%)}
+}
